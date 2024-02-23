@@ -1,13 +1,19 @@
 import {StyleSheet, View, Text, Image} from 'react-native';
-import { router} from "expo-router";
 import Onboarding from 'react-native-onboarding-swiper';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
 import Colors from "@/constants/Colors";
 
 export default function OnboardingScreen() {
 
-  const onDone = () => {
-    router.replace("/(auth)/login");
-  }
+  const completeOnboarding = async () => {
+    try {
+      await AsyncStorage.setItem('hasOnboarded', 'true');
+      console.log('Onboarding completed and status saved');
+    } catch (e) {
+      console.error('Failed to save the onboarding status', e);
+    }
+  };
   const Dot = ({ isLight, selected }) => {
     let backgroundColor;
     if (isLight) {
@@ -31,8 +37,8 @@ export default function OnboardingScreen() {
   return (
     <Onboarding
       DotComponent={Dot}
-      onDone={onDone}
-      onSkip={onDone}
+      onDone={completeOnboarding}
+      onSkip={completeOnboarding}
       pages={[
         {
           backgroundColor: Colors.lightGrey,

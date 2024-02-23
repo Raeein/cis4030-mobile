@@ -1,10 +1,14 @@
 import { Text, TouchableOpacity } from 'react-native';
 import { StyleSheet } from 'react-native';
-import React from 'react';
 
 import Colors from '@/constants/Colors';
 
-export default function OrangePrimaryButton({ title, onPress }) {
+interface OrangePrimaryButtonProps {
+  title: string;
+  onPress: () => void;
+}
+
+export default function OrangePrimaryButton({ title, onPress }: OrangePrimaryButtonProps) {
   return (
     <TouchableOpacity style={styles.Button} onPress={onPress}>
       <Text style={styles.ButtonText}>{title}</Text>
