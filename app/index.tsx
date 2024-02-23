@@ -4,7 +4,8 @@ import React from "react";
 
 export default function Index() {
   // Business logic will be added later on
-  const isLoggedIn: boolean = false;
+  const hasOnboarded = false;
+  const isLoggedIn = false;
   const navigationState = useRootNavigationState();
   const segments = useSegments();
   const router = useRouter();
@@ -14,16 +15,11 @@ export default function Index() {
 
     const inAuthGroup = segments[0] === "(auth)";
 
-    if (
-      // If the user is not signed in and the initial segment is not anything
-      //  segment is not anything in the auth group.
-      !isLoggedIn &&
-      !inAuthGroup
-    ) {
-      // Redirect to the login page.
+    if (!hasOnboarded) {
+      router.replace("/onboarding");
+    } else if (!isLoggedIn && !inAuthGroup) {
       router.replace("/(auth)/login");
     } else if (isLoggedIn) {
-      // go to tabs root.
       router.replace("/(tabs)/home");
     }
   }, [isLoggedIn, segments, navigationState?.key]);
