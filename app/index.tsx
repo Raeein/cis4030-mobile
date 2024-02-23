@@ -3,7 +3,7 @@ import {View, Text} from "react-native";
 import React from "react";
 
 export default function Index() {
-  // Business logic wiil be added later on
+  // Business logic will be added later on
   const isLoggedIn: boolean = false;
   const navigationState = useRootNavigationState();
   const segments = useSegments();
