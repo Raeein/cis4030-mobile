@@ -42,21 +42,19 @@ export default function OnboardingScreen() {
       pages={[
         {
           backgroundColor: Colors.lightGrey,
-          // add the correct images
-          // image: <Image source={require('@/assets/images/onboarding1.png')} />,
-          image: <Image source={require('@/assets/images/splash.png')} style={{width: 300, height: 300}} />,
+          image: <Image source={require('@/assets/images/onboarding1.png')} style={{width: 300, height: 300}} />,
           title: 'buddy',
           subtitle: 'find the right guide for your trip',
         },
         {
           backgroundColor: Colors.lightGrey,
-          image: <View />,
+          image: <Image source={require('@/assets/images/onboarding2.png')} style={{width: 300, height: 300}} />,
           title: 'events',
           subtitle: 'search for the events occurring during your trip',
         },
         {
           backgroundColor: Colors.lightGrey,
-          image: <View />,
+          image: <Image source={require('@/assets/images/onboarding3.png')} style={{width: 300, height: 300}} />,
           title: 'itinerary',
           subtitle: 'plan your itinerary in real time with your guides',
         },

@@ -1,12 +1,14 @@
 import { useEffect } from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { router } from "expo-router";
+import { useRouter } from "expo-router";
 
 export const useCheckOnboardingStatus = () => {
-
+  const router = useRouter();
   useEffect(() => {
     const checkStatus = async () => {
+      console.log('Checking onboarding status...');
       const onboarded = await AsyncStorage.getItem('hasOnboarded');
+      console.log('Onboarding status:', onboarded);
       const hasOnboarded = onboarded === 'true';
       const isLoggedIn = false; // Placeholder for actual logic
 
@@ -20,5 +22,5 @@ export const useCheckOnboardingStatus = () => {
     };
 
     checkStatus();
-  }, [router]); // Add router to dependency array if it's expected to change, otherwise it can be omitted
+  }, [router]);
 };
