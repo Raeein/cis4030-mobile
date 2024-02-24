@@ -8,9 +8,12 @@ export default function Index() {
   }
   const segments = useSegments();
   const checkStatus = async () => {
+
     const hasOnboarded = await AsyncStorage.getItem('hasOnboarded') === 'true';
     const isLoggedIn = await AsyncStorage.getItem('isLoggedIn') === 'true';
     const inAuthGroup = segments[0] === "(auth)";
+    router.replace("/(tabs)/home");
+    return;
 
     if (!hasOnboarded) {
       router.replace("/onboarding");
