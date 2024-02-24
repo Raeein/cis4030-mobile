@@ -1,6 +1,7 @@
 import {StyleSheet, View, Text, Image} from 'react-native';
 import Onboarding from 'react-native-onboarding-swiper';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { router} from "expo-router";
 
 import Colors from "@/constants/Colors";
 
@@ -10,6 +11,7 @@ export default function OnboardingScreen() {
     try {
       await AsyncStorage.setItem('hasOnboarded', 'true');
       console.log('Onboarding completed and status saved');
+      router.replace("/(auth)/login");
     } catch (e) {
       console.error('Failed to save the onboarding status', e);
     }
