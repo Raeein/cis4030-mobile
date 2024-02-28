@@ -1,10 +1,15 @@
 import { StyleSheet, View, Text, TouchableOpacity} from 'react-native';
 import React from 'react';
+import { router } from 'expo-router';
 import OrangePrimaryButton from '@/components/OrangePrimaryButton';
 export default function AuthScreen() {
-  const handleTravelerPress = () => { };
+  const handleTravelerPress = () => {
+    router.push("/(auth)/auth/sign-up");
+  };
 
-  const handleGuidePress = () => { };
+  const handleGuidePress = () => {
+    router.push("/(auth)/auth/sign-up");
+  };
 
   const handleSignInPress = () => { };
 

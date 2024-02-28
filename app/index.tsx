@@ -12,13 +12,13 @@ export default function Index() {
     const hasOnboarded = await AsyncStorage.getItem('hasOnboarded') === 'true';
     const isLoggedIn = await AsyncStorage.getItem('isLoggedIn') === 'true';
     const inAuthGroup = segments[0] === "(auth)";
-    router.replace("/(tabs)/home");
-    return;
+    // router.replace("/(tabs)/home");
+    // return;
 
     if (!hasOnboarded) {
       router.replace("/onboarding");
     } else if (!isLoggedIn && !inAuthGroup) {
-      router.replace("/(auth)/login");
+      router.replace("/(auth)/auth");
     } else if (isLoggedIn) {
       router.replace("/(tabs)/home");
     }
