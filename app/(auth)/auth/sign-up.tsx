@@ -1,4 +1,5 @@
 import React from 'react';
+import { router } from "expo-router";
 import { View, TextInput, Text, StyleSheet, ScrollView } from 'react-native';
 import { Formik } from 'formik';
 import OrangePrimaryButton from '@/components/OrangePrimaryButton';
@@ -9,6 +10,7 @@ export default function SignUpScreen() {
   const handleFormSubmit = (values) => {
     console.log('Form submitted!');
     console.log(values);
+    router.push("/(auth)/auth/sign-up-photo");
   };
 
   return (
