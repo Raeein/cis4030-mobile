@@ -4,6 +4,7 @@ import { View, TextInput, Text, StyleSheet, ScrollView } from 'react-native';
 import { Formik } from 'formik';
 import OrangePrimaryButton from '@/components/OrangePrimaryButton';
 import Colors from "@/constants/Colors";
+import * as Yup from 'yup';
 
 export default function SignUpScreen() {
 
@@ -13,22 +14,73 @@ export default function SignUpScreen() {
     router.push("/(auth)/auth/sign-up-photo");
   };
 
+  const SignupSchema = Yup.object().shape({
+    firstName: Yup.string().required('First name is required'),
+    lastName: Yup.string().required('Last name is required'),
+    email: Yup.string().email('Invalid email').required('Email is required'),
+    phoneNumber: Yup.string().required('Phone number is required'),
+    password: Yup.string()
+      .min(6, 'Password must be at least 6 characters')
+      .required('Password is required'),
+
+    dateOfBirth: Yup.string()
+      .required('Date of birth is required')
+      .matches(/^\d{2}\/\d{2}\/\d{4}$/, 'Invalid date of birth, format should be MM/DD/YYYY')
+      .test('dateOfBirth', 'Date of birth cannot be in the future', value => {
+        const today = new Date();
+        const parts = value.split('/');
+        const dob = new Date(`${parts[2]}-${parts[0]}-${parts[1]}`);
+        return dob <= today;
+      }),
+
+  });
+
+  let initialValues;
+  if (__DEV__) {
+    initialValues = {
+      firstName: 'John',
+      lastName: 'Doe',
+      email: 'a@a.com',
+      phoneNumber: '1234567890',
+      password: 'password',
+      dateOfBirth: '01/01/2000'
+    }
+  } else {
+    initialValues = {
+      firstName: '',
+      lastName: '',
+      email: '',
+      phoneNumber: '',
+      password: '',
+      dateOfBirth: ''
+    }
+  }
+
   return (
     <ScrollView contentContainerStyle={styles.container}>
       <Text style={styles.title}>Let's start by getting to know you better</Text>
       <Formik
-        initialValues={{
-          firstName: '',
-          lastName: '',
-          email: '',
-          phoneNumber: '',
-          password: '',
-          dateOfBirth: ''
+        initialValues={initialValues}
+        validationSchema={SignupSchema}
+        onSubmit={(values, actions) => {
+          // Check and touch all fields to trigger validation messages
+          actions.setTouched({
+            firstName: true,
+            lastName: true,
+            email: true,
+            phoneNumber: true,
+            password: true,
+            dateOfBirth: true
+          });
+          actions.validateForm().then((errors) => {
+            // If no errors, submit the form
+            if (Object.keys(errors).length === 0) {
+              handleFormSubmit(values, actions);
+            }
+          });
         }}
-        onSubmit={handleFormSubmit}
       >
-        {({ handleChange, handleBlur, handleSubmit, values }) => (
-          <View style={styles.form}>
+        {({ handleChange, handleBlur, handleSubmit, values, errors, touched }) => (          <View style={styles.form}>
             <View style={styles.inputRow}>
               <TextInput
                 onChangeText={handleChange('firstName')}
@@ -74,8 +126,9 @@ export default function SignUpScreen() {
               onBlur={handleBlur('dateOfBirth')}
               style={styles.textInput}
               value={values.dateOfBirth}
-              placeholder="Date of Birth"
+              placeholder="Date of Birth: MM/DD/YYYY"
             />
+            {Object.keys(errors).map((key) => touched[key] && <Text style={styles.errorText} key={key}>{errors[key]}</Text>)}
             <OrangePrimaryButton title="Next" onPress={handleSubmit} />
           </View>
         )}
@@ -87,9 +140,9 @@ export default function SignUpScreen() {
 const styles = StyleSheet.create({
   container: {
     flexGrow: 1,
-    justifyContent: 'center', // This centers the content vertically
-    alignItems: 'center', // This centers the content horizontally
-    padding: 20, // Add some padding around the content
+    justifyContent: 'center',
+    alignItems: 'center',
+    padding: 20,
     backgroundColor: Colors.lightGrey,
   },
   title: {
@@ -99,27 +152,26 @@ const styles = StyleSheet.create({
     textAlign: 'center'
   },
   form: {
-    width: '100%', // Use the full width of the container
+    width: '100%',
   },
   inputRow: {
     flexDirection: 'row',
     justifyContent: 'space-between'
   },
   textInput: {
-    marginBottom: 15, // Add some space between the text inputs
-    borderWidth: 1, // Add a border to each text input
+    marginBottom: 15,
+    borderWidth: 1,
     borderColor: '#ccc',
-    borderRadius: 50, // Round the corners of the text inputs
-    padding: 10, // Add some padding inside the text inputs
+    borderRadius: 50,
+    padding: 10,
     backgroundColor: Colors.white,
     width: '100%',
   },
   halfInput: {
-    width: '48%' // Use slightly less than half the width to account for margin
+    width: '48%'
   },
   errorText: {
     color: 'red',
-    marginBottom: 10, // Add some space below the error text
+    marginBottom: 10,
   },
-  // Add other styles as needed
 });
