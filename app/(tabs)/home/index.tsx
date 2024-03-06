@@ -19,15 +19,23 @@ function LocationButton( ) {
 export default function HomeScreen() {
     return (
         <View style={styles.container}>
-            {/* <ScrollView> */}
-                <View style={styles.locationBtnContainer}>
-                    <LocationButton></LocationButton>
-                </View>  
-                <View style={styles.profileContainer}>
-                    <View style={styles.imageContainer}></View>
-                    <Text style={styles.nameText}>Name</Text> 
-                </View>          
-            {/* </ScrollView> */}
+            <View style={styles.locationBtnContainer}>
+                <LocationButton></LocationButton>
+            </View>  
+            <View style={styles.profileContainer}>
+                {/* <ScrollView contentContainerStyle={styles.scrollViewContainer}> */}
+                    <View style={styles.imageContainer}></View> 
+                    <View style={styles.nameContainer}>
+                        <Text style={styles.nameText}>Name</Text>
+                        <Image style={styles.check} source={require('@/assets/images/verification-icon.png')} />
+                    </View>
+                    <Text style={styles.ageText}>Age</Text>
+                    <View style={styles.infoContainerSmall}></View>
+                    <View style={styles.infoContainerSmall}></View>
+                    <View style={styles.infoContainerLarge}></View>
+                    <View style={styles.infoContainerLarge}></View>
+                {/* </ScrollView> */}
+            </View>
         </View>
     );
 }
@@ -73,25 +81,57 @@ const styles = StyleSheet.create({
         height: 20,
         tintColor: 'fff',
     },
+    scrollViewContainer: {
+        flexGrow: 1,
+    },
     profileContainer: {
         alignItems: 'center',
         backgroundColor: '#D9D9D9',
         padding: 10,
-        marginTop: 10,
+        marginTop: 0,
         borderRadius: 15,
-        width: '90%',
-        height: '90%',
+        width: '98%',
+        height: '85%',
     },
     imageContainer: {
         marginTop: 30,
-        marginBottom: 10,
+        marginBottom: 15,
         backgroundColor: "#2f95dc",
         padding: 10,
         width: 160,
         height: 160,
         borderRadius: 90,
     },
+    nameContainer: {
+        flexDirection: 'row',
+    },
     nameText: {
-        fontSize: 30,
+        fontSize: 35,
+        marginRight: 8,
+    },
+    check: {
+        width: 20,
+        height: 20,
+        top: 13,
+    },
+    ageText: {
+        fontSize: 18,
+        marginBottom: 20,
+    },
+    infoContainerSmall: {
+        width: '90%',
+        height: 70,
+        padding: 10,
+        marginBottom: 15,
+        borderRadius: 13,
+        backgroundColor: '#fff',
+    },
+    infoContainerLarge: {
+        width: '90%',
+        height: 200,
+        padding: 10,
+        marginBottom: 15,
+        borderRadius: 13,
+        backgroundColor: '#fff',
     }
 });
