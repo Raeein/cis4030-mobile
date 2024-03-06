@@ -23,7 +23,7 @@ export default function HomeScreen() {
                 <LocationButton></LocationButton>
             </View>  
             <View style={styles.profileContainer}>
-                {/* <ScrollView contentContainerStyle={styles.scrollViewContainer}> */}
+                <ScrollView contentContainerStyle={styles.scrollViewContainer}>
                     <View style={styles.imageContainer}></View> 
                     <View style={styles.nameContainer}>
                         <Text style={styles.nameText}>Name</Text>
@@ -34,7 +34,13 @@ export default function HomeScreen() {
                     <View style={styles.infoContainerSmall}></View>
                     <View style={styles.infoContainerLarge}></View>
                     <View style={styles.infoContainerLarge}></View>
-                {/* </ScrollView> */}
+                </ScrollView>
+                {/* <TouchableOpacity>
+                    <Image style={styles.likeIcon} source={require('@/assets/images/check-icon.png')} />
+                </TouchableOpacity>
+                <TouchableOpacity>
+                    <Image style={styles.XIcon} source={require('@/assets/images/X-icon.png')} />
+                </TouchableOpacity> */}
             </View>
         </View>
     );
@@ -83,14 +89,16 @@ const styles = StyleSheet.create({
     },
     scrollViewContainer: {
         flexGrow: 1,
+        alignItems: 'center',
+        width: 320,
     },
     profileContainer: {
         alignItems: 'center',
         backgroundColor: '#D9D9D9',
-        padding: 10,
+        padding: 0,
         marginTop: 0,
         borderRadius: 15,
-        width: '98%',
+        width: '100%',
         height: '85%',
     },
     imageContainer: {
@@ -133,5 +141,9 @@ const styles = StyleSheet.create({
         marginBottom: 15,
         borderRadius: 13,
         backgroundColor: '#fff',
+    },
+    likeIcon: {
+    },
+    XIcon: {
     }
 });
