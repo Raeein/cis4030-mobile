@@ -22,7 +22,11 @@ export default function HomeScreen() {
             {/* <ScrollView> */}
                 <View style={styles.locationBtnContainer}>
                     <LocationButton></LocationButton>
-                </View>                
+                </View>  
+                <View style={styles.profileContainer}>
+                    <View style={styles.imageContainer}></View>
+                    <Text style={styles.nameText}>Name</Text> 
+                </View>          
             {/* </ScrollView> */}
         </View>
     );
@@ -33,6 +37,8 @@ const styles = StyleSheet.create({
         flex: 1,
         alignItems: 'center',
         justifyContent: 'center',
+        padding: 20,
+        backgroundColor: '#fff',
     },
     title: {
         fontSize: 20,
@@ -44,7 +50,8 @@ const styles = StyleSheet.create({
         width: '80%',
     },
     locationBtnContainer: {
-        top: -330,
+        top: 5,
+        position: 'absolute',
     },
     locationBtn: {
         backgroundColor: Colors.primary,
@@ -54,7 +61,7 @@ const styles = StyleSheet.create({
         marginVertical: 5,
         minWidth: 200,
         alignItems: 'center',
-        justifyContent: 'centers',
+        justifyContent: 'center',
         flexDirection: 'row',
     },
     locBtnText: {
@@ -64,6 +71,27 @@ const styles = StyleSheet.create({
     arrow: {
         width: 20,
         height: 20,
-        tintColor: 'ffffff',
+        tintColor: 'fff',
     },
+    profileContainer: {
+        alignItems: 'center',
+        backgroundColor: '#D9D9D9',
+        padding: 10,
+        marginTop: 10,
+        borderRadius: 15,
+        width: '90%',
+        height: '90%',
+    },
+    imageContainer: {
+        marginTop: 30,
+        marginBottom: 10,
+        backgroundColor: "#2f95dc",
+        padding: 10,
+        width: 160,
+        height: 160,
+        borderRadius: 90,
+    },
+    nameText: {
+        fontSize: 30,
+    }
 });
