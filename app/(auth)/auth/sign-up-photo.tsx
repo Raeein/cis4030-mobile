@@ -3,8 +3,14 @@ import React, { useState, useEffect } from 'react';
 import * as ImagePicker from 'expo-image-picker';
 import Colors from "@/constants/Colors";
 
+type Img = 'lg' | 'sm1' | 'sm2';
+
 export default function SignUpPhotosScreen() {
-  const pickImage = async () => {
+  const [imgLg, setImgLg] = useState('');
+  const [imgSm1, setImgSm1] = useState('');
+  const [imgSm2, setImgSm2] = useState('');
+
+  const pickImage = async (imgType: Img) => {
     // No permissions request is necessary for launching the image library
     let result = await ImagePicker.launchImageLibraryAsync({
       mediaTypes: ImagePicker.MediaTypeOptions.All,
@@ -13,11 +19,15 @@ export default function SignUpPhotosScreen() {
       quality: 1,
     });
 
-    console.log(result);
-
-    // if (!result.canceled) {
-    //   setImage(result.assets[0].uri);
-    // }
+    if (!result.canceled) {
+      if (imgType == 'lg') {
+        setImgLg(result.assets[0].uri);
+      } else if (imgType == 'sm1') {
+        setImgSm1(result.assets[0].uri);
+      } else if (imgType == 'sm2') {
+        setImgSm2(result.assets[0].uri);
+      }
+    }
   };
 
   return (
@@ -25,15 +35,17 @@ export default function SignUpPhotosScreen() {
       <Text style={styles.h1}>Setting up your profile</Text>
       <Text style={styles.h2}>Step 1: Upload photos</Text>
       <View style={styles.imgContainer}>
-        <View style={styles.imgLg}>
-        <Button title="+" onPress={pickImage} />
+        <View style={styles.imgLgBox}>
+          {/* <Button title="+" onPress={() => pickImage("lg")}/> */}
+          {/* {imgLg && <Image source={{ uri: imgLg }} style={styles.imgLg}/> } */}
+          {imgLg ? <Image source={{ uri: imgLg }} style={styles.imgLg}/> : <Button title="+" onPress={() => pickImage("lg")} />}
         </View>
         <View style={styles.smImgContainer}>
-          <View style={styles.imgSm}>
-          <Button title="+" onPress={pickImage} />
+          <View style={styles.imgSmBox}>
+          {imgSm1 ? <Image source={{ uri: imgSm1 }} style={styles.imgSm}/> : <Button title="+" onPress={() => pickImage("sm1")} />}
           </View>
-          <View style={styles.imgSm}>
-          <Button title="+" onPress={pickImage}/>
+          <View style={styles.imgSmBox}>
+          {imgSm2 ? <Image source={{ uri: imgSm2 }} style={styles.imgSm}/> : <Button title="+" onPress={() => pickImage("sm2")} />}
           </View>
         </View>
       </View>    
@@ -63,7 +75,7 @@ const styles = StyleSheet.create({
     width: '95%',
     marginTop: 20,
   },
-  imgLg: {
+  imgLgBox: {
     height: '55%',
     width: '100%',
     borderStyle: 'dashed',
@@ -72,6 +84,10 @@ const styles = StyleSheet.create({
     borderRadius: 1,
     alignSelf: 'center'
   },
+  imgLg: {
+    height: '100%',
+    width: '100%',
+  },
   smImgContainer: {
     flex: 1,
     flexDirection: 'row',
@@ -79,7 +95,7 @@ const styles = StyleSheet.create({
     gap: 20,
     height: "30%",
   },
-  imgSm: {
+  imgSmBox: {
     height: '60%',
     width: '47%',
     borderStyle: 'dashed',
@@ -87,6 +103,10 @@ const styles = StyleSheet.create({
     borderWidth: 2,
     borderRadius: 1,
     marginTop: 20,
+  },
+  imgSm: {
+    height: '100%',
+    width: '100%',
   }
 
 
