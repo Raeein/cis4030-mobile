@@ -1,7 +1,11 @@
 import { StyleSheet, Button, Image, View, Platform, Text } from 'react-native';
 import React, { useState, useEffect } from 'react';
+import { router } from 'expo-router';
 import * as ImagePicker from 'expo-image-picker';
 import Colors from "@/constants/Colors";
+import OrangePrimaryButton from '@/components/OrangePrimaryButton'; 
+import { signUpStyles } from './styles';
+
 
 type Img = 'lg' | 'sm1' | 'sm2';
 
@@ -9,9 +13,9 @@ export default function SignUpPhotosScreen() {
   const [imgLg, setImgLg] = useState('');
   const [imgSm1, setImgSm1] = useState('');
   const [imgSm2, setImgSm2] = useState('');
+  const [numImg, setNum] = useState(0);
 
   const pickImage = async (imgType: Img) => {
-    // No permissions request is necessary for launching the image library
     let result = await ImagePicker.launchImageLibraryAsync({
       mediaTypes: ImagePicker.MediaTypeOptions.All,
       allowsEditing: true,
@@ -22,22 +26,27 @@ export default function SignUpPhotosScreen() {
     if (!result.canceled) {
       if (imgType == 'lg') {
         setImgLg(result.assets[0].uri);
+        setNum(prevNum =>  prevNum + 1);
       } else if (imgType == 'sm1') {
         setImgSm1(result.assets[0].uri);
+        setNum(prevNum =>  prevNum + 1);
       } else if (imgType == 'sm2') {
         setImgSm2(result.assets[0].uri);
+        setNum(prevNum =>  prevNum + 1);
       }
     }
   };
 
+  const handleNextPress = () => {
+    router.push("/(auth)/auth/sign-up-background");
+  }
+
   return (
-    <View style={styles.container}>
-      <Text style={styles.h1}>Setting up your profile</Text>
-      <Text style={styles.h2}>Step 1: Upload photos</Text>
+    <View style={signUpStyles.container}>
+      <Text style={signUpStyles.h1}>Setting up your profile</Text>
+      <Text style={signUpStyles.h2}>Step 1: Upload photos</Text>
       <View style={styles.imgContainer}>
         <View style={styles.imgLgBox}>
-          {/* <Button title="+" onPress={() => pickImage("lg")}/> */}
-          {/* {imgLg && <Image source={{ uri: imgLg }} style={styles.imgLg}/> } */}
           {imgLg ? <Image source={{ uri: imgLg }} style={styles.imgLg}/> : <Button title="+" onPress={() => pickImage("lg")} />}
         </View>
         <View style={styles.smImgContainer}>
@@ -48,29 +57,15 @@ export default function SignUpPhotosScreen() {
           {imgSm2 ? <Image source={{ uri: imgSm2 }} style={styles.imgSm}/> : <Button title="+" onPress={() => pickImage("sm2")} />}
           </View>
         </View>
-      </View>    
+        {numImg >= 3 ? <OrangePrimaryButton title="Next" onPress={handleNextPress}/> : null}
+      </View>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1, 
-    alignItems: 'flex-start', 
-    justifyContent: 'flex-start',
-    padding: 20,
-    marginTop: 50,
-    backgroundColor: Colors.lightGrey,
-  },
-  h1: {
-    fontSize: 25,
-    fontWeight: '700',
-  },
-  h2: {
-    fontSize: 20,
-    fontWeight: '500',
-  },
   imgContainer: {
+    flex: 1,
     height: '90%',
     width: '95%',
     marginTop: 20,
@@ -108,7 +103,4 @@ const styles = StyleSheet.create({
     height: '100%',
     width: '100%',
   }
-
-
-
 });

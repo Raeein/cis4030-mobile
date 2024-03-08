@@ -1,33 +1,37 @@
-import { StyleSheet, Button, Image, View, Platform, Text } from 'react-native';
+import { View, Text } from 'react-native';
 import React, { useState, useEffect } from 'react';
 import { router } from 'expo-router';
-import Colors from "@/constants/Colors";
 import OrangePrimaryButton from '@/components/OrangePrimaryButton'; 
 import { signUpStyles } from './styles';
-import SelectDropdown from 'react-native-select-dropdown'
+import sex from '@/assets/info/sex.json'
+import hometowns from '@/assets/info/hometown.json'
+import ethnicity from '@/assets/info/ethnicity.json'
+import jobs from '@/assets/info/job-title.json'
+import DropDownSelect from '@/components/DropDownSelect';
+
+interface DropdownInfo {
+    data: string
+    information: string[]
+}
 
 export default function SignUpBackgroundScreen() {
     const HandleNextPress = () => {
         router.push("/(auth)/auth/sign-up-interests");
     }
 
-    const sex = ["Male", "Female"];
+    const dropDowns: DropdownInfo[] = [sex, hometowns, ethnicity, jobs]
 
     return (
         <View style={signUpStyles.container}>
-            <Text style={signUpStyles.h1}>Step 2: Background</Text>
-            <SelectDropdown 
-                data={sex} 
-                onSelect={(selectedItem, index) => {
-                    console.log(selectedItem, index);
-                }}
-                buttonTextAfterSelection={(selectedItem, index) => {
-                    return selectedItem;
-                }}
-                rowTextForSelection={(item, index) => {
-                    return item;
-                }}
-            />
+            {
+                dropDowns.map((item) => {
+                    return (<DropDownSelect item={item} />)
+                })
+            }
         </View>
     );
 }
+
+
+// I want to render 4 select boxes each with their own defaultButtonText, and data
+// Dict -- > { defaultButtonText: data }
