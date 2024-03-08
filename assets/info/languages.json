@@ -1,6 +1,12 @@
 {
     "data": "Languages",
     "information": [
-        "Vietnamese"
+        "Vietnamese", "English", "French", "Spanish", "Mandarin", "German",
+        "Portuguese", "Croatian", "Serbian", "Japanese", "Korean", "Italian",
+        "Russian", "Arabic", "Hindi", "Bengali", "Urdu", "Turkish", "Dutch",
+        "Swedish", "Greek", "Polish", "Romanian", "Hungarian", "Farsi", "Thai",
+        "Malay", "Indonesian", "Tagalog", "Swahili", "Hebrew", "Czech", "Slovak",
+        "Danish", "Norwegian", "Finnish", "Icelandic", "Irish", "Scottish Gaelic",
+        "Welsh", "Latin", "Esperanto", "Hawaiian", "Navajo", "Yoruba", "Zulu"
     ]
 }
