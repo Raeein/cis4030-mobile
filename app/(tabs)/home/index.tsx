@@ -25,7 +25,9 @@ export default function HomeScreen() {
             <View style={styles.profileContainer}>
                 <ScrollView contentContainerStyle={styles.scrollViewContainer}>
 
-                    <View style={styles.imageContainer}></View> 
+                    <View style={styles.imageContainer}>
+                        <Image style={styles.profilePic} source={require('@/assets/images/temp-profile-pic.png')} />
+                    </View> 
                     <View style={styles.nameContainer}>
                         <Text style={styles.nameText}>Kelly</Text>
                         <Image style={styles.check} source={require('@/assets/images/verification-icon.png')} />
@@ -59,15 +61,20 @@ export default function HomeScreen() {
                         </View>
                     </View>
 
-                    <View style={styles.infoContainerLarge}></View>
-                    <View style={styles.infoContainerLarge}></View>
+                    <View style={styles.tripTypeContainer}>
+                        <Text style = {styles.subtitle}>Types of Trips</Text>
+                    </View>
+                    <View style={styles.tripTypeContainer}></View>
                 </ScrollView>
-                {/* <TouchableOpacity>
+            </View>
+
+            <View style={styles.likeContainer}>
+                <TouchableOpacity>
                     <Image style={styles.likeIcon} source={require('@/assets/images/check-icon.png')} />
                 </TouchableOpacity>
                 <TouchableOpacity>
-                    <Image style={styles.XIcon} source={require('@/assets/images/X-icon.png')} />
-                </TouchableOpacity> */}
+                    <Image style={styles.likeIcon} source={require('@/assets/images/X-icon.png')} />
+                </TouchableOpacity>
             </View>
         </View>
     );
@@ -129,6 +136,7 @@ const styles = StyleSheet.create({
         borderRadius: 15,
         width: '100%',
         height: '85%',
+        position: 'absolute',
     },
     imageContainer: {
         marginTop: 30,
@@ -138,6 +146,14 @@ const styles = StyleSheet.create({
         width: 160,
         height: 160,
         borderRadius: 90,
+        overflow: 'hidden',
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
+    profilePic: {
+        width: '120%',
+        height: '120%',
+        resizeMode: 'cover',
     },
     nameContainer: {
         flexDirection: 'row',
@@ -165,14 +181,6 @@ const styles = StyleSheet.create({
         backgroundColor: '#fff',
         alignItems: 'center',
         justifyContent: 'center',
-    },
-    infoContainerLarge: {
-        width: '90%',
-        height: 200,
-        padding: 10,
-        marginBottom: 15,
-        borderRadius: 13,
-        backgroundColor: '#fff',
     },
     row: {
         flexDirection: 'row',
@@ -209,8 +217,20 @@ const styles = StyleSheet.create({
     normalText: {
         fontSize: 15,
     },
-    likeIcon: {
+    tripTypeContainer: {
+        width: '90%',
+        height: 200,
+        padding: 25,
+        marginBottom: 15,
+        borderRadius: 13,
+        backgroundColor: '#fff',
     },
-    XIcon: {
-    }
+    likeContainer: {
+        flexDirection: 'row',
+        marginBottom: -670,
+    },
+    likeIcon: {
+        width: 50,
+        height: 50,
+    },
 });
