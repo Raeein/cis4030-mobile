@@ -7,12 +7,10 @@ import interests from '@/assets/info/interests.json'
 import countries from '@/assets/info/countries.json'
 import DropDownSelect from '@/components/DropDownSelect';
 import BubbleBox from '@/components/BubbleBox';
-import { ProfileInfo  } from '@/types';
-
 
 export default function SignUpInterestsScreen() {
     const handleNextPress = () => {
-        router.push("/(auth)/auth/sign-up-interests");
+        router.push("/(auth)/auth/test");
     }
 
     return (
