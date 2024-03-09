@@ -10,7 +10,7 @@ function changeLocation() {
 function LocationButton( ) {
     return (
         <TouchableOpacity style={styles.locationBtn} onPress={changeLocation}>
-            <Text style={styles.locBtnText}>Location</Text>
+            <Text style={styles.locBtnText}>Vietnam</Text>
             <Image style={styles.arrow} source={require('@/assets/images/down-arrow-icon.png')} />
         </TouchableOpacity>
     );
@@ -24,14 +24,41 @@ export default function HomeScreen() {
             </View>  
             <View style={styles.profileContainer}>
                 <ScrollView contentContainerStyle={styles.scrollViewContainer}>
+
                     <View style={styles.imageContainer}></View> 
                     <View style={styles.nameContainer}>
-                        <Text style={styles.nameText}>Name</Text>
+                        <Text style={styles.nameText}>Kelly</Text>
                         <Image style={styles.check} source={require('@/assets/images/verification-icon.png')} />
                     </View>
-                    <Text style={styles.ageText}>Age</Text>
-                    <View style={styles.infoContainerSmall}></View>
-                    <View style={styles.infoContainerSmall}></View>
+                    <Text style={styles.ageText}>39</Text>
+                    
+                    <View style={styles.statContainer}>
+                        <View style={styles.row}>
+                            <View style={styles.dataSection}>
+                                <Text style={styles.largeText}>15</Text>
+                                <Text style={styles.smallText}>Guided trips</Text>
+                            </View>
+                            <View style={styles.dataSection}>
+                                <Text style={styles.largeText}>100</Text>
+                                <Text style={styles.smallText}>People guided</Text>
+                            </View>
+                            <View style={styles.dataSection}>
+                                <Text style={styles.largeText}>20</Text>
+                                <Text style={styles.smallText}>Reviews</Text>
+                            </View>
+                        </View>
+                    </View>
+
+                    <View style={styles.languageContainer}>
+                        <Text style={styles.subtitle}>Languages</Text>
+                        <View style = {styles.row}>
+                            <Text style={styles.normalText}>English, </Text>
+                            <Text style={styles.normalText}>French, </Text>
+                            <Text style={styles.normalText}>Portuguese, </Text>
+                            <Text style={styles.normalText}>Russian </Text>
+                        </View>
+                    </View>
+
                     <View style={styles.infoContainerLarge}></View>
                     <View style={styles.infoContainerLarge}></View>
                 </ScrollView>
@@ -80,17 +107,19 @@ const styles = StyleSheet.create({
     },
     locBtnText: {
         fontSize: 18,
-        color: '#fff'
+        fontWeight: 'bold',
+        paddingRight: 10,
+        color: '#ffffff',
     },
     arrow: {
         width: 20,
         height: 20,
-        tintColor: 'fff',
+        // tintColor: '#ffffff',
     },
     scrollViewContainer: {
         flexGrow: 1,
         alignItems: 'center',
-        width: 320,
+        width: 370,
     },
     profileContainer: {
         alignItems: 'center',
@@ -116,6 +145,7 @@ const styles = StyleSheet.create({
     nameText: {
         fontSize: 35,
         marginRight: 8,
+        marginBottom: 10,
     },
     check: {
         width: 20,
@@ -126,13 +156,15 @@ const styles = StyleSheet.create({
         fontSize: 18,
         marginBottom: 20,
     },
-    infoContainerSmall: {
+    statContainer: {
         width: '90%',
-        height: 70,
+        height: 80,
         padding: 10,
         marginBottom: 15,
         borderRadius: 13,
         backgroundColor: '#fff',
+        alignItems: 'center',
+        justifyContent: 'center',
     },
     infoContainerLarge: {
         width: '90%',
@@ -141,6 +173,41 @@ const styles = StyleSheet.create({
         marginBottom: 15,
         borderRadius: 13,
         backgroundColor: '#fff',
+    },
+    row: {
+        flexDirection: 'row',
+    },
+    dataSection: {
+        alignItems: 'center',
+        justifyContent: 'center',
+        paddingRight: 10,
+        paddingLeft: 10,
+    },
+    largeText: {
+        fontSize: 20,
+        paddingRight: 25,
+        paddingLeft: 25,
+        fontWeight: 'bold',
+    },
+    smallText: {
+        fontSize: 10,
+    },
+    languageContainer: {
+        width: '90%',
+        height: 80,
+        padding: 25,
+        marginBottom: 15,
+        borderRadius: 13,
+        backgroundColor: '#fff',
+        justifyContent: 'center',
+    },
+    subtitle: {
+        fontSize: 18,
+        fontWeight: 'bold',
+        marginBottom: 10,
+    },
+    normalText: {
+        fontSize: 15,
     },
     likeIcon: {
     },
