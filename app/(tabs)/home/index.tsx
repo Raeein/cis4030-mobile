@@ -3,6 +3,14 @@ import { StyleSheet, View, Text, Image, ScrollView, TouchableOpacity, Dimensions
 import { router } from 'expo-router';
 import Colors from "@/constants/Colors";
 
+const tripTypes = [
+    {source: require('@/assets/images/nature-icon.png'), text: "nature"},
+    {source: require('@/assets/images/culinary-icon.png'), text: "culinary"},
+    {source: require('@/assets/images/historical-icon.png'), text: "historical"},
+    {source: require('@/assets/images/music-icon.png'), text: "music"}
+];
+
+/* Component for displaying profile's statistics */
 function StatSection( {number, dataType} ) {
     return (
         <View style={styles.dataSection}>
@@ -12,6 +20,43 @@ function StatSection( {number, dataType} ) {
     );
 }
 
+/* Grid of icons for trip types */
+const TripTypeGrid = () => {
+    const groupedImages = [];
+    for (let i = 0; i < tripTypes.length; i += 2) {
+        groupedImages.push(tripTypes.slice(i, i + 2));
+    }
+
+    return (
+        <View style={styles.gridContainer}>
+          {groupedImages.map((group, index) => (
+            <View key={index} style={styles.gridRow}>
+              {group.map((item, itemIndex) => (
+                <View key={itemIndex} style={styles.gridItemContainer}>
+                  <Image source={item.source} style={styles.tripTypeIcon} />
+                  <Text style={styles.gridText}>{item.text}</Text>
+                </View>
+              ))}
+            </View>
+          ))}
+        </View>
+    );
+
+    // return (
+    //   <View style={styles.gridContainer}>
+    //     <View style={styles.gridRow}>
+    //       {tripTypes.map((item, index) => (
+    //         <View key={index} style={styles.gridItemContainer}>
+    //           <Image source={item.source} style={styles.tripTypeIcon} />
+    //           <Text style={styles.gridText}>{item.text}</Text>
+    //         </View>
+    //       ))}
+    //     </View>
+    //   </View>
+    // );
+  };
+
+/* Component for displaying profile's reviews */
 function Review({ name, image, review }) {
     return (
         <View style={styles.row}>
@@ -39,6 +84,7 @@ function changeLocation() {
     // Code to change trip location
 }
 
+/* Button for changing trip location */
 function LocationButton( ) {
     return (
         <TouchableOpacity style={styles.locationBtn} onPress={changeLocation}>
@@ -51,9 +97,11 @@ function LocationButton( ) {
 export default function HomeScreen() {
     return (
         <View style={styles.container}>
+
             <View style={styles.locationBtnContainer}>
                 <LocationButton></LocationButton>
             </View>  
+
             <View style={[styles.profileContainer, {width: '100%', height: '85%'}]}>
                 <ScrollView contentContainerStyle={styles.scrollViewContainer}>
 
@@ -95,29 +143,34 @@ export default function HomeScreen() {
 
                     <View style={styles.tripTypeContainer}>
                         <Text style = {styles.subtitle}>Types of Trips</Text>
+                        <TripTypeGrid></TripTypeGrid>
+                        {/* <View style={styles.row}>
+                            <Image style={styles.tripTypeIcon} source={require('@/assets/images/nature-icon.png')} />
+                            <Image style={styles.tripTypeIcon} source={require('@/assets/images/culinary-icon.png')} />
+                        </View>
+                        <View>
+                            <Image style={styles.tripTypeIcon} source={require('@/assets/images/historical-icon.png')} />
+                            <Image style={styles.tripTypeIcon} source={require('@/assets/images/music-icon.png')} />
+                        </View> */}
                     </View>
 
                     <View style={styles.reviewsContainer}>
                         <Text style = {styles.subtitle}>Past Trip Reviews</Text>
-
                         <Review 
                             name={"Jenny P"}
                             image={require('@/assets/images/temp-profile-2.png')}
                             review={"Kelly was great!"}
                         />
-
                         <Review 
                             name={"Timmy L"}
                             image={require('@/assets/images/temp-profile-3.png')}
                             review={"Super chill woman"}
                         />
-
                         <Review 
                             name={"Guy S"}
                             image={require('@/assets/images/temp-profile-1.png')}
-                            review={"Kelly was great!"}
+                            review={"Let her guide you"}
                         />
-
                     </View>
                 </ScrollView>
             </View>
@@ -130,6 +183,7 @@ export default function HomeScreen() {
                     <Image style={styles.likeIcon} source={require('@/assets/images/X-icon.png')} />
                 </TouchableOpacity>
             </View>
+            
         </View>
     );
 }
@@ -315,5 +369,34 @@ const styles = StyleSheet.create({
         height: 60, 
         marginBottom: 5, 
         marginRight: 20,
+    },
+    flatListContent: {
+        alignItems: 'center',
+    },
+    tripTypeIcon: {
+        width: 50,
+        height: 50,
+        margin: 5,
+    },
+    gridContainer: {
+        flex: 1,
+        padding: 10,
+        backgroundColor: '#fff',
+    },
+    gridRow: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        flexWrap: 'wrap',
+    },
+    gridItemContainer: {
+        width: '30%',
+        marginVertical: 5,
+        alignItems: 'center',
+        marginRight: 20,
+        marginLeft: 20,
+    },
+    gridText: {
+        marginTop: 5,
+        textAlign: 'center',
     },
 });
