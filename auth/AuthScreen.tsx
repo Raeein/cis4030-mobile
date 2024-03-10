@@ -3,16 +3,15 @@ import React from 'react';
 import OrangePrimaryButton from '@/components/OrangePrimaryButton';
 export default function AuthScreen({navigation, route}) {
   const handleTravelerPress = () => {
-    // onAuthentication();
     navigation.navigate('SignUp');
   };
 
   const handleGuidePress = () => {
-    // router.push("/(auth)/auth/sign-up");
+    navigation.navigate('SignUp');
   };
 
   const handleSignInPress = () => {
-    // router.push("/(auth)/auth/sign-up-photo");
+    navigation.navigate('SignIn');
   };
 
   return (
