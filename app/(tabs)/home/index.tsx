@@ -1,7 +1,14 @@
 import React from 'react';
-import { StyleSheet, View, Text, Image, ScrollView, TouchableOpacity } from 'react-native';
+import { StyleSheet, View, Text, Image, ScrollView, TouchableOpacity, Dimensions } from 'react-native';
 import { router } from 'expo-router';
 import Colors from "@/constants/Colors";
+
+const tripTypes = [
+    { id: '1', imageUrl: require('@/assets/images/culinary-icon.png') },
+    { id: '2', imageUrl: require('@/assets/images/historical-icon.png') },
+    { id: '3', imageURl: require('@/assets/images/music-icon.png') },
+    { id: '3', imageURl: require('@/assets/images/music-icon.png') },
+  ];
 
 function changeLocation() {
 
@@ -22,10 +29,10 @@ export default function HomeScreen() {
             <View style={styles.locationBtnContainer}>
                 <LocationButton></LocationButton>
             </View>  
-            <View style={styles.profileContainer}>
+            <View style={[styles.profileContainer, {width: '100%', height: '85%'}]}>
                 <ScrollView contentContainerStyle={styles.scrollViewContainer}>
 
-                    <View style={styles.imageContainer}>
+                    <View style={[styles.imageContainer, {marginBottom: 15}]}>
                         <Image style={styles.profilePic} source={require('@/assets/images/temp-profile-pic.png')} />
                     </View> 
                     <View style={styles.nameContainer}>
@@ -64,7 +71,46 @@ export default function HomeScreen() {
                     <View style={styles.tripTypeContainer}>
                         <Text style = {styles.subtitle}>Types of Trips</Text>
                     </View>
-                    <View style={styles.tripTypeContainer}></View>
+
+                    <View style={styles.reviewsContainer}>
+                        <Text style = {styles.subtitle}>Past Trip Reviews</Text>
+                        <View style={styles.verticalCenter}>
+                            <View style={[styles.imageContainer, {width: 60, height: 60, marginBottom: 5}]}>
+                                <Image style={styles.profilePic} source={require('@/assets/images/temp-profile-pic.png')} />
+                            </View>
+                            <View style={styles.row}>
+                                <Image style={[styles.fireIcon, {tintColor: '#D61919'}]} source={require('@/assets/images/fire-fill.png')} />
+                                <Image style={[styles.fireIcon, {tintColor: '#D61919'}]} source={require('@/assets/images/fire-fill.png')} />
+                                <Image style={[styles.fireIcon, {tintColor: '#D61919'}]} source={require('@/assets/images/fire-fill.png')} />
+                                <Image style={[styles.fireIcon, {tintColor: '#D61919'}]} source={require('@/assets/images/fire-fill.png')} />
+                                <Image style={[styles.fireIcon, {tintColor: '#DDDFE5'}]} source={require('@/assets/images/fire-fill.png')} />
+                            </View>
+                        </View>
+                        <View style={styles.verticalCenter}>
+                            <View style={[styles.imageContainer, {width: 60, height: 60, marginBottom: 5}]}>
+                                <Image style={styles.profilePic} source={require('@/assets/images/temp-profile-pic.png')} />
+                            </View>
+                            <View style={styles.row}>
+                                <Image style={[styles.fireIcon, {tintColor: '#D61919'}]} source={require('@/assets/images/fire-fill.png')} />
+                                <Image style={[styles.fireIcon, {tintColor: '#D61919'}]} source={require('@/assets/images/fire-fill.png')} />
+                                <Image style={[styles.fireIcon, {tintColor: '#D61919'}]} source={require('@/assets/images/fire-fill.png')} />
+                                <Image style={[styles.fireIcon, {tintColor: '#DDDFE5'}]} source={require('@/assets/images/fire-fill.png')} />
+                                <Image style={[styles.fireIcon, {tintColor: '#DDDFE5'}]} source={require('@/assets/images/fire-fill.png')} />
+                            </View>
+                        </View>
+                        <View style={styles.verticalCenter}>
+                            <View style={[styles.imageContainer, {width: 60, height: 60, marginBottom: 5}]}>
+                                <Image style={styles.profilePic} source={require('@/assets/images/temp-profile-pic.png')} />
+                            </View>
+                            <View style={styles.row}>
+                                <Image style={[styles.fireIcon, {tintColor: '#D61919'}]} source={require('@/assets/images/fire-fill.png')} />
+                                <Image style={[styles.fireIcon, {tintColor: '#D61919'}]} source={require('@/assets/images/fire-fill.png')} />
+                                <Image style={[styles.fireIcon, {tintColor: '#D61919'}]} source={require('@/assets/images/fire-fill.png')} />
+                                <Image style={[styles.fireIcon, {tintColor: '#D61919'}]} source={require('@/assets/images/fire-fill.png')} />
+                                <Image style={[styles.fireIcon, {tintColor: '#DDDFE5'}]} source={require('@/assets/images/fire-fill.png')} />
+                            </View>
+                        </View>
+                    </View>
                 </ScrollView>
             </View>
 
@@ -96,6 +142,12 @@ const styles = StyleSheet.create({
         marginVertical: 30,
         height: 1,
         width: '80%',
+    },
+    row: {
+        flexDirection: 'row',
+    },
+    verticalCenter: {
+        justifyContent: 'center',
     },
     locationBtnContainer: {
         top: 5,
@@ -134,13 +186,10 @@ const styles = StyleSheet.create({
         padding: 0,
         marginTop: 0,
         borderRadius: 15,
-        width: '100%',
-        height: '85%',
         position: 'absolute',
     },
     imageContainer: {
         marginTop: 30,
-        marginBottom: 15,
         backgroundColor: "#2f95dc",
         padding: 10,
         width: 160,
@@ -151,8 +200,8 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
     },
     profilePic: {
-        width: '120%',
-        height: '120%',
+        width: '150%',
+        height: '150%',
         resizeMode: 'cover',
     },
     nameContainer: {
@@ -181,9 +230,6 @@ const styles = StyleSheet.create({
         backgroundColor: '#fff',
         alignItems: 'center',
         justifyContent: 'center',
-    },
-    row: {
-        flexDirection: 'row',
     },
     dataSection: {
         alignItems: 'center',
@@ -219,7 +265,7 @@ const styles = StyleSheet.create({
     },
     tripTypeContainer: {
         width: '90%',
-        height: 200,
+        height: 300,
         padding: 25,
         marginBottom: 15,
         borderRadius: 13,
@@ -230,7 +276,20 @@ const styles = StyleSheet.create({
         marginBottom: -670,
     },
     likeIcon: {
-        width: 50,
-        height: 50,
+        width: 60,
+        height: 60,
     },
+    reviewsContainer: {
+        width: '90%',
+        height: 400,
+        padding: 25,
+        marginBottom: 15,
+        borderRadius: 13,
+        backgroundColor: '#fff',
+    },
+    fireIcon: {
+        width: 25,
+        height: 25,
+        margin: -5,
+    }
 });
