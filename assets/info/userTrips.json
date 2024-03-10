@@ -1,0 +1,19 @@
+{
+
+    "trips": {
+        "name": "First Solo Travel",
+        "location": "Saigon, VN",
+        "dateStart": "2024-03-10",
+        "dateEnd": "2024-03-22",
+        "collaborators": [
+            { 
+                "name": "Jenny",
+                "imageURL": "/@/assets/images/headshot1.png"
+            },
+            { 
+                "name": "Denny",
+                "imageURL": "/@/assets/images/headshot2.png"
+            }
+        ]
+    }
+}
