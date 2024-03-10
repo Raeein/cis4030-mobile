@@ -4,28 +4,23 @@ import Colors from "@/constants/Colors";
 import React from 'react';
 import { ProfileInfo } from '@/types';
 
-
 interface DropdownProps {
     item: ProfileInfo,
-    boxText?: string
+    boxText?: string,
+    boxColor?: string,
+    textColor?: string,
+    borderRadius?: number,
 }
 
-const DropDownSelect: React.FC<DropdownProps> = ({ item, boxText }) => {
-    var rowItems: string[];
-    if (boxText) {
-        rowItems = item.information;
-    } else {
-        rowItems = item.information.map((row) => {
-            return item.data + ": " + row;
-        })
-    }
+const DropDownSelect: React.FC<DropdownProps> = ({ item, boxText, boxColor, textColor }) => {
+    var rowItems =  item.information;
     
     return (
         <>
             <SelectDropdown 
                 data={rowItems} 
                 onSelect={(selectedItem, index) => {
-                    console.log(selectedItem, index);
+                    // console.log(selectedItem, index);
                 }}
                 buttonTextAfterSelection={(selectedItem, index) => {
                     return selectedItem;
@@ -35,12 +30,20 @@ const DropDownSelect: React.FC<DropdownProps> = ({ item, boxText }) => {
                     return item;
                 }}
                 defaultButtonText={boxText ?? item.data + ": "}
-                buttonStyle={{ justifyContent: 'flex-start', borderRadius: 10, backgroundColor: '#D9D9D9', marginTop: 10, width: '100%'}}
-                buttonTextStyle={{ fontWeight: '700', textAlign: 'left', paddingLeft: 6}}
+                buttonStyle={{ 
+                    justifyContent: 'flex-start', 
+                    borderRadius: 10, 
+                    backgroundColor: boxColor ?? '#D9D9D9',
+                    marginTop: 10, 
+                    width: '100%',
+                    borderCurve: 'circular'
+                }}
+                buttonTextStyle={{ fontWeight: '700', textAlign: 'left', paddingLeft: 6, color: textColor ?? 'black'}}
                 dropdownStyle={{ borderRadius: 10 }}
                 renderSearchInputRightIcon={() => {
                     return <Image style={signUpStyles.icon} source={require('@/assets/images/expand-down.png') }/>;
                 }}
+                search={true}
             />
         </>
     )
