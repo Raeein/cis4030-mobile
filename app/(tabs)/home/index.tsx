@@ -89,8 +89,8 @@ export default function HomeScreen() {
                                 </View>
                             </View>
                             <View style={styles.horizontalCenter}>
-                                <Text style={{fontSize: 20, fontWeight: 'bold'}}>"Kelly was great!"</Text>
-                                <Text style={{fontSize: 13, textAlign: 'right'}}>- Jenny P</Text>
+                                <Text style={styles.reviewText}>"Kelly was great!"</Text>
+                                <Text style={styles.userText}>- Jenny P</Text>
                             </View>
                         </View>
 
@@ -108,8 +108,8 @@ export default function HomeScreen() {
                                 </View>
                             </View>
                             <View style={styles.horizontalCenter}>
-                                <Text style={{fontSize: 20, fontWeight: 'bold'}}>"Super chill woman"</Text>
-                                <Text style={{fontSize: 13, textAlign: 'right'}}>- Timmy L</Text>
+                                <Text style={styles.reviewText}>"Super chill woman"</Text>
+                                <Text style={styles.userText}>- Timmy L</Text>
                             </View>
                         </View>
 
@@ -127,8 +127,8 @@ export default function HomeScreen() {
                                 </View>
                             </View>
                             <View style={styles.horizontalCenter}>
-                                <Text style={{fontSize: 20, fontWeight: 'bold'}}>"Let her guide you"</Text>
-                                <Text style={{fontSize: 13, textAlign: 'right'}}>- Guy S</Text>
+                                <Text style={styles.reviewText}>"Let her guide you"</Text>
+                                <Text style={styles.userText}>- Guy S</Text>
                             </View>
                         </View>
 
@@ -203,7 +203,7 @@ const styles = StyleSheet.create({
     scrollViewContainer: {
         flexGrow: 1,
         alignItems: 'center',
-        width: 370,
+        padding: 5,
     },
     profileContainer: {
         alignItems: 'center',
@@ -213,12 +213,47 @@ const styles = StyleSheet.create({
         borderRadius: 15,
         position: 'absolute',
     },
+    statContainer: {
+        width: '95%',
+        height: 80,
+        padding: 10,
+        marginBottom: 15,
+        borderRadius: 13,
+        backgroundColor: '#fff',
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
+    languageContainer: {
+        width: '95%',
+        height: 80,
+        padding: 25,
+        marginBottom: 15,
+        borderRadius: 13,
+        backgroundColor: '#fff',
+        justifyContent: 'center',
+    },
+    tripTypeContainer: {
+        width: '95%',
+        height: 300,
+        padding: 25,
+        marginBottom: 15,
+        borderRadius: 13,
+        backgroundColor: '#fff',
+    },
+    reviewsContainer: {
+        width: '95%',
+        height: 400,
+        padding: 25,
+        marginBottom: 15,
+        borderRadius: 13,
+        backgroundColor: '#fff',
+    },
     imageContainer: {
         marginTop: 30,
         backgroundColor: "#2f95dc",
         padding: 10,
-        width: 160,
-        height: 160,
+        width: 130,
+        height: 130,
         borderRadius: 90,
         overflow: 'hidden',
         alignItems: 'center',
@@ -246,16 +281,6 @@ const styles = StyleSheet.create({
         fontSize: 18,
         marginBottom: 20,
     },
-    statContainer: {
-        width: '90%',
-        height: 80,
-        padding: 10,
-        marginBottom: 15,
-        borderRadius: 13,
-        backgroundColor: '#fff',
-        alignItems: 'center',
-        justifyContent: 'center',
-    },
     dataSection: {
         alignItems: 'center',
         justifyContent: 'center',
@@ -271,15 +296,6 @@ const styles = StyleSheet.create({
     smallText: {
         fontSize: 10,
     },
-    languageContainer: {
-        width: '90%',
-        height: 80,
-        padding: 25,
-        marginBottom: 15,
-        borderRadius: 13,
-        backgroundColor: '#fff',
-        justifyContent: 'center',
-    },
     subtitle: {
         fontSize: 18,
         fontWeight: 'bold',
@@ -287,14 +303,6 @@ const styles = StyleSheet.create({
     },
     normalText: {
         fontSize: 15,
-    },
-    tripTypeContainer: {
-        width: '90%',
-        height: 300,
-        padding: 25,
-        marginBottom: 15,
-        borderRadius: 13,
-        backgroundColor: '#fff',
     },
     likeContainer: {
         flexDirection: 'row',
@@ -304,17 +312,17 @@ const styles = StyleSheet.create({
         width: 60,
         height: 60,
     },
-    reviewsContainer: {
-        width: '90%',
-        height: 400,
-        padding: 25,
-        marginBottom: 15,
-        borderRadius: 13,
-        backgroundColor: '#fff',
-    },
     fireIcon: {
         width: 25,
         height: 25,
         margin: -5,
-    }
+    }, 
+    reviewText: {
+        fontSize: 20, 
+        fontWeight: 'bold',
+    },
+    userText: {
+        fontSize: 13, 
+        textAlign: 'right',
+    },
 });
