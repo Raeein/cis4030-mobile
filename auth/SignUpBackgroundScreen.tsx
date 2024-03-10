@@ -20,7 +20,7 @@ export default function SignUpBackgroundScreen({ navigation }) {
   const dropDowns: ProfileInfo[] = [sex, hometowns, ethnicity, jobs];
 
   return (
-    <ScrollView style={{flex: 1}} contentContainerStyle={signUpStyles.container}>
+    <ScrollView contentContainerStyle={styles.container}>
       <Text style={signUpStyles.h1}>Step 2: Background</Text>
       {dropDowns.map((item, index) => (
         <DropDownSelect key={index} item={item} />
@@ -41,6 +41,9 @@ export default function SignUpBackgroundScreen({ navigation }) {
 }
 
 const styles = StyleSheet.create({
+  container: {
+    padding: 20
+  },
   languages: {
     paddingTop: 40,
     paddingBottom: 10,

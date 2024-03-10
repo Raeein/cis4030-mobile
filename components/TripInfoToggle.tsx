@@ -1,27 +1,34 @@
 import React from 'react';
 import { StyleSheet, View, Text, ScrollView } from 'react-native';
 import { UserTripData, Event } from '@/types';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import ActionButton from '@/components/ActionButton';
 
 interface TripInfoToggleProps {
     events?: Event[]
 }
 
-const TripInfoToggle: React.FC<TripInfoToggleProps> = ({ events }) => {
+const Stack = createNativeStackNavigator();
+
+const TripInfoToggle: React.FC<TripInfoToggleProps> = ({ events, navigation }) => {
     return (
         <View style={styles.container}>
             { events &&
                 events.map((event, index) => {
                     return (
-                        <View style={styles.eventHeader}>
-                            <View style={styles.dateHeader}>
-                                <Text style={styles.numDay}>15</Text>  
-                                <Text style={styles.day}>Mon</Text>
-                            </View>
-                            
-                            <View style={styles.eventName}>
-                                <Text style={styles.eventNameText}>{event.name}</Text>
+                        <View>
+                            <View key={index} style={styles.eventHeader}>
+                                <View style={styles.dateHeader}>
+                                    <Text style={styles.numDay}>15</Text>  
+                                    <Text style={styles.day}>Mon</Text>
+                                </View>
+                                
+                                <View style={styles.eventName}>
+                                    <Text style={styles.eventNameText}>{event.name}</Text>
+                                </View>
                             </View>
                         </View>
+
                     )
                 })
             }

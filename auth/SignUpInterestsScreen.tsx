@@ -20,8 +20,8 @@ export default function SignUpInterestsScreen({ navigation }) {
         <Text style={styles.h2}>Activties</Text>
         <ScrollView contentContainerStyle={styles.interestsCntr}>
           {
-            interests.information.map((activity) => {
-              return (<BubbleBox name={activity}/>)
+            interests.information.map((activity, index) => {
+              return (<BubbleBox key={index} name={activity}/>)
             })
           }
         </ScrollView>

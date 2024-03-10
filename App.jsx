@@ -5,7 +5,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { MatchingTabStack } from "./tabs/matching/MatchingTabStack";
 import HomeScreen from "./tabs/home/HomeScreen";
 import ProfileScreen from './tabs/profile/ProfileScreen';
-import ItineraryScreen from './tabs/itinerary/ItineraryScreen';
+import ItineraryStack from './tabs/itinerary/ItineraryStack'
 import AuthStack from './auth/AuthStack';
 
 import OnboardingScreen from './OnboardingScreen';
@@ -80,7 +80,7 @@ export default function App() {
                 />
                 <Tab.Screen
                     name="Itinerary"
-                    component={ItineraryScreen}
+                    component={ItineraryStack}
                     options={{
                         headerShown: false,
                         tabBarIcon: ({ color }) => <TabBarIcon IconComponent={AntDesign} name="calendar" color={color} />,

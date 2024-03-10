@@ -3,15 +3,21 @@ import { StyleSheet, View, Text, Image, TouchableOpacity } from 'react-native';
 import { useState } from 'react';
 import { UserTripData } from '@/types';
 import TripInfoToggle from '@/components/TripInfoToggle';
+import ActionButton from './ActionButton';
 
 interface UserTripsProps {
-    data: UserTripData
+    data: UserTripData,
+    navigation: {
+        navigate: (screen: string) => void;
+    }
 }
 
-const UserTrips: React.FC<UserTripsProps> = ({ data }) => {
+const UserTrips: React.FC<UserTripsProps> = ({ data, navigation }) => {
     const [showInfo, setInfo] = useState(false);
     const onPress = () => setInfo(!showInfo);
-    
+    const HandleSeeSchedule = () => {
+        navigation.navigate('Schedule')
+    }
     return (
         <View style={styles.container}>
             <Text style={styles.title}>
@@ -32,6 +38,7 @@ const UserTrips: React.FC<UserTripsProps> = ({ data }) => {
             {
                 showInfo && <TripInfoToggle events={data.events}/>
             }
+            <ActionButton title={"See Full Schedule"} onPress={HandleSeeSchedule}/>
         </View>
     )
 }
