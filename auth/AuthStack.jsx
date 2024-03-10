@@ -1,6 +1,7 @@
 import React from 'react';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import AuthScreen from "./AuthScreen";
+import SignInScreen from "./SignInScreen";
 import SignUpScreen from './SignUpScreen'; // Update the import path as needed
 import SignUpPhotoScreen from "./SignUpPhotoScreen";
 import SignUpBackgroundScreen from "./SignUpBackgroundScreen";
@@ -16,6 +17,13 @@ function AuthStack({ onAuthentication }) {
                 name="Login"
                 component={AuthScreen}
                 options={{ headerShown: false }}
+            />
+
+            <Stack.Screen
+                name="SignIn"
+                component={SignInScreen}
+                initialParams={{ onAuthentication }}
+                options={{ headerShown: true, title: 'Sign In' }}
             />
             <Stack.Screen
                 name="SignUp"

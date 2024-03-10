@@ -28,7 +28,7 @@ export default function MatchesScreen({ navigation }) {
   ];
 
   const handleMessagePress = (message) => {
-    navigation.navigate('Chat')
+    navigation.navigate('Chat', { userName: message.name, userImage: message.image });
   };
 
 
