@@ -5,16 +5,11 @@ import OrangePrimaryButton from '@/components/OrangePrimaryButton';
 import Colors from "@/constants/Colors";
 import * as Yup from 'yup';
 
-export default function SignUpScreen({ navigation}) {
-
+export default function SignUpScreen({ navigation }) {
   const handleFormSubmit = (values) => {
     console.log('Form submitted!');
-    console.log(values);
-    navigation.reset({
-      index: 0,
-      routes: [{ name: 'Profile' }], // 'MainTabs' should be the name you've given to your main tab navigator
-    });
-    // router.push("/(auth)/auth/sign-up-photo");
+    // console.log(values);
+    navigation.navigate('SignUpPhoto');
   };
 
   const SignupSchema = Yup.object().shape({

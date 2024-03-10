@@ -2,11 +2,9 @@ import { StyleSheet, View, Text, TouchableOpacity} from 'react-native';
 import React from 'react';
 import OrangePrimaryButton from '@/components/OrangePrimaryButton';
 export default function AuthScreen({navigation, route}) {
-  const { onAuthentication } = route.params;
   const handleTravelerPress = () => {
-    onAuthentication();
-    // navigation.navigate('SignUp');
-    // router.push("/(auth)/auth/sign-up");
+    // onAuthentication();
+    navigation.navigate('SignUp');
   };
 
   const handleGuidePress = () => {

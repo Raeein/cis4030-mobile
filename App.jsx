@@ -13,7 +13,10 @@ import AuthScreen from './auth/AuthScreen';
 const Tab = createBottomTabNavigator();
 
 export default function App() {
-    AsyncStorage.clear();
+    AsyncStorage.clear()
+        .then(() => {
+            console.log('Storage successfully cleared!');
+        })
     const [isLoading, setIsLoading] = useState(true);
     const [isOnboarded, setIsOnboarded] = useState(false);
     const [isAuthenticated, setIsAuthenticated] = useState(false);
