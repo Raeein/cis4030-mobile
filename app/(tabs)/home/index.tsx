@@ -74,42 +74,64 @@ export default function HomeScreen() {
 
                     <View style={styles.reviewsContainer}>
                         <Text style = {styles.subtitle}>Past Trip Reviews</Text>
-                        <View style={styles.verticalCenter}>
-                            <View style={[styles.imageContainer, {width: 60, height: 60, marginBottom: 5}]}>
-                                <Image style={styles.profilePic} source={require('@/assets/images/temp-profile-pic.png')} />
+
+                        <View style={styles.row}>
+                            <View style={styles.horizontalCenter}>
+                                <View style={[styles.imageContainer, {width: 60, height: 60, marginBottom: 5, marginRight: 20}]}>
+                                    <Image style={styles.profilePic} source={require('@/assets/images/temp-profile-2.png')} />
+                                </View>
+                                <View style={styles.row}>
+                                    <Image style={[styles.fireIcon, {tintColor: '#D61919'}]} source={require('@/assets/images/fire-fill.png')} />
+                                    <Image style={[styles.fireIcon, {tintColor: '#D61919'}]} source={require('@/assets/images/fire-fill.png')} />
+                                    <Image style={[styles.fireIcon, {tintColor: '#D61919'}]} source={require('@/assets/images/fire-fill.png')} />
+                                    <Image style={[styles.fireIcon, {tintColor: '#D61919'}]} source={require('@/assets/images/fire-fill.png')} />
+                                    <Image style={[styles.fireIcon, {tintColor: '#DDDFE5'}]} source={require('@/assets/images/fire-fill.png')} />
+                                </View>
                             </View>
-                            <View style={styles.row}>
-                                <Image style={[styles.fireIcon, {tintColor: '#D61919'}]} source={require('@/assets/images/fire-fill.png')} />
-                                <Image style={[styles.fireIcon, {tintColor: '#D61919'}]} source={require('@/assets/images/fire-fill.png')} />
-                                <Image style={[styles.fireIcon, {tintColor: '#D61919'}]} source={require('@/assets/images/fire-fill.png')} />
-                                <Image style={[styles.fireIcon, {tintColor: '#D61919'}]} source={require('@/assets/images/fire-fill.png')} />
-                                <Image style={[styles.fireIcon, {tintColor: '#DDDFE5'}]} source={require('@/assets/images/fire-fill.png')} />
-                            </View>
-                        </View>
-                        <View style={styles.verticalCenter}>
-                            <View style={[styles.imageContainer, {width: 60, height: 60, marginBottom: 5}]}>
-                                <Image style={styles.profilePic} source={require('@/assets/images/temp-profile-pic.png')} />
-                            </View>
-                            <View style={styles.row}>
-                                <Image style={[styles.fireIcon, {tintColor: '#D61919'}]} source={require('@/assets/images/fire-fill.png')} />
-                                <Image style={[styles.fireIcon, {tintColor: '#D61919'}]} source={require('@/assets/images/fire-fill.png')} />
-                                <Image style={[styles.fireIcon, {tintColor: '#D61919'}]} source={require('@/assets/images/fire-fill.png')} />
-                                <Image style={[styles.fireIcon, {tintColor: '#DDDFE5'}]} source={require('@/assets/images/fire-fill.png')} />
-                                <Image style={[styles.fireIcon, {tintColor: '#DDDFE5'}]} source={require('@/assets/images/fire-fill.png')} />
+                            <View style={styles.horizontalCenter}>
+                                <Text style={{fontSize: 20, fontWeight: 'bold'}}>"Kelly was great!"</Text>
+                                <Text style={{fontSize: 13}}>- Jenny P</Text>
                             </View>
                         </View>
-                        <View style={styles.verticalCenter}>
-                            <View style={[styles.imageContainer, {width: 60, height: 60, marginBottom: 5}]}>
-                                <Image style={styles.profilePic} source={require('@/assets/images/temp-profile-pic.png')} />
+
+                        <View style={styles.row}>
+                            <View style={styles.horizontalCenter}>
+                                <View style={[styles.imageContainer, {width: 60, height: 60, marginBottom: 5, marginRight: 20}]}>
+                                    <Image style={styles.profilePic} source={require('@/assets/images/temp-profile-3.png')} />
+                                </View>
+                                <View style={styles.row}>
+                                    <Image style={[styles.fireIcon, {tintColor: '#D61919'}]} source={require('@/assets/images/fire-fill.png')} />
+                                    <Image style={[styles.fireIcon, {tintColor: '#D61919'}]} source={require('@/assets/images/fire-fill.png')} />
+                                    <Image style={[styles.fireIcon, {tintColor: '#D61919'}]} source={require('@/assets/images/fire-fill.png')} />
+                                    <Image style={[styles.fireIcon, {tintColor: '#DDDFE5'}]} source={require('@/assets/images/fire-fill.png')} />
+                                    <Image style={[styles.fireIcon, {tintColor: '#DDDFE5'}]} source={require('@/assets/images/fire-fill.png')} />
+                                </View>
                             </View>
-                            <View style={styles.row}>
-                                <Image style={[styles.fireIcon, {tintColor: '#D61919'}]} source={require('@/assets/images/fire-fill.png')} />
-                                <Image style={[styles.fireIcon, {tintColor: '#D61919'}]} source={require('@/assets/images/fire-fill.png')} />
-                                <Image style={[styles.fireIcon, {tintColor: '#D61919'}]} source={require('@/assets/images/fire-fill.png')} />
-                                <Image style={[styles.fireIcon, {tintColor: '#D61919'}]} source={require('@/assets/images/fire-fill.png')} />
-                                <Image style={[styles.fireIcon, {tintColor: '#DDDFE5'}]} source={require('@/assets/images/fire-fill.png')} />
+                            <View style={styles.horizontalCenter}>
+                                <Text style={{fontSize: 20, fontWeight: 'bold'}}>"Super chill woman"</Text>
+                                <Text style={{fontSize: 13}}>- Timmy L</Text>
                             </View>
                         </View>
+
+                        <View style={styles.row}>
+                            <View style={styles.horizontalCenter}>
+                                <View style={[styles.imageContainer, {width: 60, height: 60, marginBottom: 5, marginRight: 20}]}>
+                                    <Image style={styles.profilePic} source={require('@/assets/images/temp-profile-1.png')} />
+                                </View>
+                                <View style={styles.row}>
+                                    <Image style={[styles.fireIcon, {tintColor: '#D61919'}]} source={require('@/assets/images/fire-fill.png')} />
+                                    <Image style={[styles.fireIcon, {tintColor: '#D61919'}]} source={require('@/assets/images/fire-fill.png')} />
+                                    <Image style={[styles.fireIcon, {tintColor: '#D61919'}]} source={require('@/assets/images/fire-fill.png')} />
+                                    <Image style={[styles.fireIcon, {tintColor: '#DDDFE5'}]} source={require('@/assets/images/fire-fill.png')} />
+                                    <Image style={[styles.fireIcon, {tintColor: '#DDDFE5'}]} source={require('@/assets/images/fire-fill.png')} />
+                                </View>
+                            </View>
+                            <View style={styles.horizontalCenter}>
+                                <Text style={{fontSize: 20, fontWeight: 'bold'}}>"Let her guide you"</Text>
+                                <Text style={{fontSize: 13}}>- Guy S</Text>
+                            </View>
+                        </View>
+
                     </View>
                 </ScrollView>
             </View>
@@ -147,6 +169,9 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
     },
     verticalCenter: {
+        justifyContent: 'center',
+    },
+    horizontalCenter: {
         justifyContent: 'center',
     },
     locationBtnContainer: {
