@@ -5,9 +5,10 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { MatchingTabStack } from "./tabs/matching/MatchingTabStack";
 import ProfileScreen from './tabs/profile/profile';
 import ItineraryScreen from './tabs/itinerary/itinerary';
+import AuthStack from './auth/AuthStack';
 
 import OnboardingScreen from './OnboardingScreen';
-// import AuthScreen from './YourAuthScreenPath'; // Update this path
+import AuthScreen from './auth/AuthScreen';
 
 const Tab = createBottomTabNavigator();
 
@@ -15,7 +16,7 @@ export default function App() {
     AsyncStorage.clear();
     const [isLoading, setIsLoading] = useState(true);
     const [isOnboarded, setIsOnboarded] = useState(false);
-    // const [isAuthenticated, setIsAuthenticated] = useState(false);
+    const [isAuthenticated, setIsAuthenticated] = useState(false);
 
     // Check AsyncStorage to see if the user has onboarded
     useEffect(() => {
@@ -23,7 +24,7 @@ export default function App() {
             const hasOnboarded = await AsyncStorage.getItem('hasOnboarded');
             const hasAuthenticated = await AsyncStorage.getItem('isAuthenticated');
             setIsOnboarded(hasOnboarded === 'true');
-            // setIsAuthenticated(hasAuthenticated === 'true');
+            setIsAuthenticated(hasAuthenticated === 'true');
             setIsLoading(false);
         };
 
@@ -39,9 +40,13 @@ export default function App() {
         return <OnboardingScreen onComplete={() => setIsOnboarded(true)} />;
     }
 
-    // if (!isAuthenticated) {
-    //     return <AuthScreen onSignIn={() => setIsAuthenticated(true)} />;
-    // }
+    if (!isAuthenticated) {
+        return (
+            <NavigationContainer>
+                <AuthStack onAuthentication={() => setIsAuthenticated(true)} />
+            </NavigationContainer>
+        );
+    }
 
     // Main app
     return (
