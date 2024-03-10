@@ -1,39 +1,37 @@
 import React from 'react';
 import { StyleSheet, View, Text, Image, TouchableOpacity } from 'react-native';
-
-interface TripCollaborator {
-    name: string,
-    imageURL: string
-}
-
-interface UserTripData {
-    name: string,
-    location: string,
-    dateStart: string,
-    dateEnd: string,
-    collaborators: TripCollaborator[]
-}
+import { useState } from 'react';
+import { UserTripData } from '@/types';
+import TripInfoToggle from '@/components/TripInfoToggle';
 
 interface UserTripsProps {
     data: UserTripData
 }
 
 const UserTrips: React.FC<UserTripsProps> = ({ data }) => {
-    console.log(data.collaborators)
+    const [showInfo, setInfo] = useState(false);
+    const onPress = () => setInfo(!showInfo);
+    
     return (
         <View style={styles.container}>
             <Text style={styles.title}>
                 {data.name}
-                <Image source={require('@/assets/images/expand-down.png')} style={styles.icon}/>
+                <TouchableOpacity onPress={onPress}>
+                    <Image source={require('@/assets/images/expand-down.png')} style={styles.icon}/>
+                </TouchableOpacity>
+                
             </Text>
             <Text style={styles.details}>{data.location} {data.dateStart} {data.dateEnd}</Text>
             <View style={styles.collaborators}>
                 {
-                    data.collaborators.map((item) => {
-                        return <Image source={require("@/assets/images/headshot1.png")}/>
+                    data.collaborators.map((item, index) => {
+                        return <Image key={index} source={require("@/assets/images/headshot1.png")}/>
                     })
                 }
             </View>
+            {
+                showInfo && <TripInfoToggle events={data.events}/>
+            }
         </View>
     )
 }
@@ -65,7 +63,7 @@ const styles = StyleSheet.create({
         flex: 1,
         flexDirection: 'row',
         gap: 5,
-        padding: 10
+        marginTop: 10
     },
     icon: {
         height: 20,

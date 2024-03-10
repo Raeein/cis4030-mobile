@@ -14,14 +14,23 @@ interface EventBoxProps {
 }
 
 const EventBox: React.FC<EventBoxProps> = ({ data, image }) => {
+    const HandleAddEvent= () => {
+        console.log('Handle See Event Info Click');
+    }
+
+    const HandleSendEvent = () => {
+        console.log('Handle Send Event Click');
+    }
+
+
     return (
         <View style={styles.container}>
             <Text style={styles.title}>{data.title}</Text>
             <Text style={styles.date}>{data.date}</Text>
             <Image source={require('@/assets/images/carnival.png')} style={styles.image}></Image>
             <View style={styles.btnCtnr}>
-                <ActionButton title={"Add"}/>
-                <ActionButton title={"Send"}/>
+                <ActionButton title={"Add"} onPress={HandleAddEvent} />
+                <ActionButton title={"Send"} onPress={HandleSendEvent}/>
             </View>
         </View>
     )
@@ -43,11 +52,11 @@ const styles = StyleSheet.create({
         width: '94%',
         height: 225,
         borderRadius: 15,
-        marginTop: 10
+        marginTop: 10,
     },
     title: {
         fontWeight: '700',
-        fontSize: 22
+        fontSize: 22,
     },
     date: {
         fontWeight: '400',

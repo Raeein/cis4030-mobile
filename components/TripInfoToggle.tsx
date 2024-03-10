@@ -34,7 +34,8 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         width: '100%',
-        padding: 10
+        padding: 10,
+        paddingBottom: 15,
     },
     text: {
         fontWeight: '500',

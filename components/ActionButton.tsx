@@ -4,12 +4,13 @@ import { StyleSheet, View, Text, Image, TouchableOpacity } from 'react-native';
 interface ActionButtonProps {
     title: string,
     buttonColor?: string,
-    textColor?: string
+    textColor?: string,
+    onPress: () => void
 }
 
-const ActionButton: React.FC<ActionButtonProps> = ({ title, buttonColor, textColor }) => {
+const ActionButton: React.FC<ActionButtonProps> = ({ title, buttonColor, textColor, onPress }) => {
     return (
-        <TouchableOpacity style={styles.container}>
+        <TouchableOpacity style={[styles.container, { backgroundColor: buttonColor ?? '#D9D9D9' }]} onPress={onPress}>
             <Text style={[styles.title, { color: textColor ?? 'black' }]}>{title}</Text>
         </TouchableOpacity>
     )
