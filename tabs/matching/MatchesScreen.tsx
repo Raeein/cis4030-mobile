@@ -23,8 +23,12 @@ export default function MatchesScreen({ navigation }) {
   };
 
   const messages = [
-    { name: 'Trevor', message: 'Can’t wait to meet you.', unreadCount: 9, image: 'https://picsum.photos/300?random=1' },
+    { name: 'Trevor', message: 'WHERE IS MA MONEY??', unreadCount: 9, image: 'https://picsum.photos/300?random=1' },
     { name: 'Bob', message: 'Hey, how are you?', unreadCount: 1, image: 'https://picsum.photos/300?random=2' },
+    { name: 'Alice', message: 'I’m good, thanks!', unreadCount: 1, image: 'https://picsum.photos/300?random=3' },
+    { name: 'Charlie', message: 'See you soon!', unreadCount: 2, image: 'https://picsum.photos/300?random=4' },
+    { name: 'David', message: 'Hi!', unreadCount: 11, image: 'https://picsum.photos/300?random=5' },
+    { name: 'Eve', message: 'Yes im here', unreadCount: 0, image: 'https://picsum.photos/300?random=6' },
   ];
 
   const handleMessagePress = (message) => {
