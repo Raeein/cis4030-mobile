@@ -3,12 +3,28 @@ import { StyleSheet, View, Text, Image, ScrollView, TouchableOpacity, Dimensions
 import { router } from 'expo-router';
 import Colors from "@/constants/Colors";
 
-const tripTypes = [
-    { id: '1', imageUrl: require('@/assets/images/culinary-icon.png') },
-    { id: '2', imageUrl: require('@/assets/images/historical-icon.png') },
-    { id: '3', imageURl: require('@/assets/images/music-icon.png') },
-    { id: '3', imageURl: require('@/assets/images/music-icon.png') },
-  ];
+function Review({ name, image, review }) {
+    return (
+        <View style={styles.row}>
+            <View style={styles.horizontalCenter}>
+                <View style={[styles.imageContainer, styles.singleReview]}>
+                    <Image style={styles.profilePic} source={image} />
+                </View>
+                <View style={styles.row}>
+                    <Image style={[styles.fireIcon, {tintColor: '#D61919'}]} source={require('@/assets/images/fire-fill.png')} />
+                    <Image style={[styles.fireIcon, {tintColor: '#D61919'}]} source={require('@/assets/images/fire-fill.png')} />
+                    <Image style={[styles.fireIcon, {tintColor: '#D61919'}]} source={require('@/assets/images/fire-fill.png')} />
+                    <Image style={[styles.fireIcon, {tintColor: '#D61919'}]} source={require('@/assets/images/fire-fill.png')} />
+                    <Image style={[styles.fireIcon, {tintColor: '#DDDFE5'}]} source={require('@/assets/images/fire-fill.png')} />
+                </View>
+            </View>
+            <View style={styles.horizontalCenter}>
+                <Text style={styles.reviewText}>"{review}"</Text>
+                <Text style={styles.userText}>- {name}</Text>
+            </View>
+        </View>
+    );
+}
 
 function changeLocation() {
 
@@ -75,62 +91,23 @@ export default function HomeScreen() {
                     <View style={styles.reviewsContainer}>
                         <Text style = {styles.subtitle}>Past Trip Reviews</Text>
 
-                        <View style={styles.row}>
-                            <View style={styles.horizontalCenter}>
-                                <View style={[styles.imageContainer, {width: 60, height: 60, marginBottom: 5, marginRight: 20}]}>
-                                    <Image style={styles.profilePic} source={require('@/assets/images/temp-profile-2.png')} />
-                                </View>
-                                <View style={styles.row}>
-                                    <Image style={[styles.fireIcon, {tintColor: '#D61919'}]} source={require('@/assets/images/fire-fill.png')} />
-                                    <Image style={[styles.fireIcon, {tintColor: '#D61919'}]} source={require('@/assets/images/fire-fill.png')} />
-                                    <Image style={[styles.fireIcon, {tintColor: '#D61919'}]} source={require('@/assets/images/fire-fill.png')} />
-                                    <Image style={[styles.fireIcon, {tintColor: '#D61919'}]} source={require('@/assets/images/fire-fill.png')} />
-                                    <Image style={[styles.fireIcon, {tintColor: '#DDDFE5'}]} source={require('@/assets/images/fire-fill.png')} />
-                                </View>
-                            </View>
-                            <View style={styles.horizontalCenter}>
-                                <Text style={styles.reviewText}>"Kelly was great!"</Text>
-                                <Text style={styles.userText}>- Jenny P</Text>
-                            </View>
-                        </View>
+                        <Review 
+                            name={"Jenny P"}
+                            image={require('@/assets/images/temp-profile-2.png')}
+                            review={"Kelly was great!"}
+                        />
 
-                        <View style={styles.row}>
-                            <View style={styles.horizontalCenter}>
-                                <View style={[styles.imageContainer, {width: 60, height: 60, marginBottom: 5, marginRight: 20}]}>
-                                    <Image style={styles.profilePic} source={require('@/assets/images/temp-profile-3.png')} />
-                                </View>
-                                <View style={styles.row}>
-                                    <Image style={[styles.fireIcon, {tintColor: '#D61919'}]} source={require('@/assets/images/fire-fill.png')} />
-                                    <Image style={[styles.fireIcon, {tintColor: '#D61919'}]} source={require('@/assets/images/fire-fill.png')} />
-                                    <Image style={[styles.fireIcon, {tintColor: '#D61919'}]} source={require('@/assets/images/fire-fill.png')} />
-                                    <Image style={[styles.fireIcon, {tintColor: '#DDDFE5'}]} source={require('@/assets/images/fire-fill.png')} />
-                                    <Image style={[styles.fireIcon, {tintColor: '#DDDFE5'}]} source={require('@/assets/images/fire-fill.png')} />
-                                </View>
-                            </View>
-                            <View style={styles.horizontalCenter}>
-                                <Text style={styles.reviewText}>"Super chill woman"</Text>
-                                <Text style={styles.userText}>- Timmy L</Text>
-                            </View>
-                        </View>
+                        <Review 
+                            name={"Timmy L"}
+                            image={require('@/assets/images/temp-profile-3.png')}
+                            review={"Super chill woman"}
+                        />
 
-                        <View style={styles.row}>
-                            <View style={styles.horizontalCenter}>
-                                <View style={[styles.imageContainer, {width: 60, height: 60, marginBottom: 5, marginRight: 20}]}>
-                                    <Image style={styles.profilePic} source={require('@/assets/images/temp-profile-1.png')} />
-                                </View>
-                                <View style={styles.row}>
-                                    <Image style={[styles.fireIcon, {tintColor: '#D61919'}]} source={require('@/assets/images/fire-fill.png')} />
-                                    <Image style={[styles.fireIcon, {tintColor: '#D61919'}]} source={require('@/assets/images/fire-fill.png')} />
-                                    <Image style={[styles.fireIcon, {tintColor: '#D61919'}]} source={require('@/assets/images/fire-fill.png')} />
-                                    <Image style={[styles.fireIcon, {tintColor: '#DDDFE5'}]} source={require('@/assets/images/fire-fill.png')} />
-                                    <Image style={[styles.fireIcon, {tintColor: '#DDDFE5'}]} source={require('@/assets/images/fire-fill.png')} />
-                                </View>
-                            </View>
-                            <View style={styles.horizontalCenter}>
-                                <Text style={styles.reviewText}>"Let her guide you"</Text>
-                                <Text style={styles.userText}>- Guy S</Text>
-                            </View>
-                        </View>
+                        <Review 
+                            name={"Guy S"}
+                            image={require('@/assets/images/temp-profile-1.png')}
+                            review={"Kelly was great!"}
+                        />
 
                     </View>
                 </ScrollView>
@@ -198,7 +175,6 @@ const styles = StyleSheet.create({
     arrow: {
         width: 20,
         height: 20,
-        // tintColor: '#ffffff',
     },
     scrollViewContainer: {
         flexGrow: 1,
@@ -324,5 +300,11 @@ const styles = StyleSheet.create({
     userText: {
         fontSize: 13, 
         textAlign: 'right',
+    },
+    singleReview: {
+        width: 60, 
+        height: 60, 
+        marginBottom: 5, 
+        marginRight: 20,
     },
 });
