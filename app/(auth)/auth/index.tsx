@@ -11,7 +11,9 @@ export default function AuthScreen() {
     router.push("/(auth)/auth/sign-up");
   };
 
-  const handleSignInPress = () => { };
+  const handleSignInPress = () => {
+    // router.push("/(auth)/auth/sign-up-photo");
+  };
 
   return (
     <View style={styles.container}>
