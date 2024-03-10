@@ -3,6 +3,15 @@ import { StyleSheet, View, Text, Image, ScrollView, TouchableOpacity, Dimensions
 import { router } from 'expo-router';
 import Colors from "@/constants/Colors";
 
+function StatSection( {number, dataType} ) {
+    return (
+        <View style={styles.dataSection}>
+            <Text style={styles.largeText}>{number}</Text>
+            <Text style={styles.smallText}>{dataType}</Text>
+        </View>
+    );
+}
+
 function Review({ name, image, review }) {
     return (
         <View style={styles.row}>
@@ -27,7 +36,7 @@ function Review({ name, image, review }) {
 }
 
 function changeLocation() {
-
+    // Code to change trip location
 }
 
 function LocationButton( ) {
@@ -59,18 +68,18 @@ export default function HomeScreen() {
                     
                     <View style={styles.statContainer}>
                         <View style={styles.row}>
-                            <View style={styles.dataSection}>
-                                <Text style={styles.largeText}>15</Text>
-                                <Text style={styles.smallText}>Guided trips</Text>
-                            </View>
-                            <View style={styles.dataSection}>
-                                <Text style={styles.largeText}>100</Text>
-                                <Text style={styles.smallText}>People guided</Text>
-                            </View>
-                            <View style={styles.dataSection}>
-                                <Text style={styles.largeText}>20</Text>
-                                <Text style={styles.smallText}>Reviews</Text>
-                            </View>
+                            <StatSection
+                                number={'15'}
+                                dataType={'Guided trips'}
+                            />
+                            <StatSection
+                                number={'100'}
+                                dataType={'People guided'}
+                            />
+                            <StatSection
+                                number={'20'}
+                                dataType={'Reviews'}
+                            />
                         </View>
                     </View>
 
