@@ -8,12 +8,13 @@ import eventData from '@/assets/info/events.json'
 import userData from '@/assets/info/userTrips.json'
 import UserTrips from '@/components/UserTrips';
 
-export default function ItineraryScreen() {
+export default function ItineraryScreen({ navigation }) {
   const events = eventData.events
   const userTripData = userData.trips
 
   const handleAddTrip = () => {
     console.log('Handle Add Trip');
+    navigation.navigate('Trip');
   }
 
   return (
@@ -23,8 +24,8 @@ export default function ItineraryScreen() {
       </View>
       <Text style={styles.h1}>Events starting from: </Text>
       <EventBox data={events} image={'@/assets/images/carnival.png'} />
-      <Text style={styles.h1}>Your trips</Text>
-      <UserTrips data={userTripData}/>
+      <Text style={styles.h1}>Your trips</Text> 
+      <UserTrips data={userTripData} navigation={navigation}/>
       <ActionButton title={"Add Trip"} buttonColor='#F0A365' textColor='white' onPress={handleAddTrip}/>
     </ScrollView>
   );
