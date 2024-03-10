@@ -90,7 +90,7 @@ export default function HomeScreen() {
                             </View>
                             <View style={styles.horizontalCenter}>
                                 <Text style={{fontSize: 20, fontWeight: 'bold'}}>"Kelly was great!"</Text>
-                                <Text style={{fontSize: 13}}>- Jenny P</Text>
+                                <Text style={{fontSize: 13, textAlign: 'right'}}>- Jenny P</Text>
                             </View>
                         </View>
 
@@ -109,7 +109,7 @@ export default function HomeScreen() {
                             </View>
                             <View style={styles.horizontalCenter}>
                                 <Text style={{fontSize: 20, fontWeight: 'bold'}}>"Super chill woman"</Text>
-                                <Text style={{fontSize: 13}}>- Timmy L</Text>
+                                <Text style={{fontSize: 13, textAlign: 'right'}}>- Timmy L</Text>
                             </View>
                         </View>
 
@@ -128,7 +128,7 @@ export default function HomeScreen() {
                             </View>
                             <View style={styles.horizontalCenter}>
                                 <Text style={{fontSize: 20, fontWeight: 'bold'}}>"Let her guide you"</Text>
-                                <Text style={{fontSize: 13}}>- Guy S</Text>
+                                <Text style={{fontSize: 13, textAlign: 'right'}}>- Guy S</Text>
                             </View>
                         </View>
 
