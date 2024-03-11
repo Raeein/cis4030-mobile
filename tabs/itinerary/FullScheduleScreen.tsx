@@ -5,17 +5,22 @@ import userData from '@/assets/info/userTrips.json'
 
 const userTripData = userData.trips
 
+const formatDate = (dateString: string) => {
+    const options = { month: 'long', day: 'numeric' };
+    return new Date(dateString).toLocaleDateString('en-US', options);
+}
+
 const Schedule: React.FC<UserTripData> = ({data}) => {
     return (
         <View style={styles.container}>
             <Text style={styles.tripTitle}>{data.name}</Text>
-            <Text style={styles.tripSubtitle}>{data.location}, {data.dateStart} - {data.dateEnd}</Text>
+            <Text style={styles.tripSubtitle}>{data.location}, {formatDate(data.dateStart)} - {formatDate(data.dateEnd)}</Text>
             <View style={styles.eventContainer}>
                 <ScrollView style={styles.scroll}>
                     {data.events.map((event, index) => (
                         <View key={index}>
                             <View style={styles.eventDateContainer}>
-                                <Text style={[styles.eventDate, {marginBottom: 3}]}>{event.date}</Text>
+                                <Text style={[styles.eventDate, {marginBottom: 3}]}>{formatDate(event.date)}</Text>
                             </View>
                             <Text style={[styles.eventDate, {marginBottom: 10}]}>9:00 AM</Text>
                             <View style={styles.eventNameContainer}>
@@ -59,7 +64,7 @@ const styles = StyleSheet.create({
         width: '100%',
     },
     scroll: {
-
+       
     },
     eventNameContainer: {
         backgroundColor: '#F0A365',
