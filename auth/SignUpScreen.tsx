@@ -34,25 +34,34 @@ export default function SignUpScreen({ navigation }) {
   });
 
   let initialValues;
-  if (__DEV__) {
-    initialValues = {
-      firstName: 'John',
-      lastName: 'Doe',
-      email: 'a@a.com',
-      phoneNumber: '1234567890',
-      password: 'password',
-      dateOfBirth: '01/01/2000'
-    }
-  } else {
-    initialValues = {
-      firstName: '',
-      lastName: '',
-      email: '',
-      phoneNumber: '',
-      password: '',
-      dateOfBirth: ''
-    }
+  initialValues = {
+    firstName: '',
+    lastName: '',
+    email: '',
+    phoneNumber: '',
+    password: '',
+    dateOfBirth: ''
   }
+
+  // if (__DEV__) {
+  //   initialValues = {
+  //     firstName: 'John',
+  //     lastName: 'Doe',
+  //     email: 'a@a.com',
+  //     phoneNumber: '1234567890',
+  //     password: 'password',
+  //     dateOfBirth: '01/01/2000'
+  //   }
+  // } else {
+  //   initialValues = {
+  //     firstName: '',
+  //     lastName: '',
+  //     email: '',
+  //     phoneNumber: '',
+  //     password: '',
+  //     dateOfBirth: ''
+  //   }
+  // }
 
   return (
     <ScrollView contentContainerStyle={styles.container}>

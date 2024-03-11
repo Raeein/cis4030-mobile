@@ -1,6 +1,7 @@
 import React from 'react';
-import { SafeAreaView, StyleSheet, View, Text, Image, ScrollView, TouchableOpacity, Dimensions } from 'react-native';
+import { SafeAreaView, StyleSheet, View, Text, Image, ScrollView, TouchableOpacity, TouchableWithoutFeedback } from 'react-native';
 import Colors from "@/constants/Colors";
+import Swiper from 'react-native-deck-swiper';
 
 const tripTypes = [
     {source: require('@/assets/images/nature-icon.png'), text: "nature"},
@@ -12,70 +13,63 @@ const tripTypes = [
 /* Component for displaying profile's statistics */
 function StatSection( {number, dataType} ) {
     return (
-        <View style={styles.dataSection}>
-            <Text style={styles.largeText}>{number}</Text>
-            <Text style={styles.smallText}>{dataType}</Text>
-        </View>
+      <View style={styles.dataSection}>
+          <Text style={styles.largeText}>{number}</Text>
+          <Text style={styles.smallText}>{dataType}</Text>
+      </View>
     );
 }
 
 /* Grid of icons for trip types */
 const TripTypeGrid = () => {
-    const groupedImages = [];
-    for (let i = 0; i < tripTypes.length; i += 2) {
-        groupedImages.push(tripTypes.slice(i, i + 2));
-    }
-
     return (
-        <View style={styles.gridContainer}>
-          {groupedImages.map((group, index) => (
-            <View key={index} style={styles.gridRow}>
-              {group.map((item, itemIndex) => (
-                <View key={itemIndex} style={styles.gridItemContainer}>
-                  <Image source={item.source} style={styles.tripTypeIcon} />
-                  <Text style={styles.gridText}>{item.text}</Text>
+      <View style={styles.tripTypeContainer}>
+          <ScrollView horizontal={true} showsHorizontalScrollIndicator={false} contentContainerStyle={styles.tripTypesScrollView}>
+              {tripTypes.map((item, index) => (
+                <View key={index} style={styles.tripTypeItem}>
+                    <Image source={item.source} style={styles.tripTypeIcon} />
+                    <Text style={styles.tripTypeText}>{item.text}</Text>
                 </View>
               ))}
-            </View>
-          ))}
-        </View>
+          </ScrollView>
+      </View>
     );
+};
 
-    // return (
-    //   <View style={styles.gridContainer}>
-    //     <View style={styles.gridRow}>
-    //       {tripTypes.map((item, index) => (
-    //         <View key={index} style={styles.gridItemContainer}>
-    //           <Image source={item.source} style={styles.tripTypeIcon} />
-    //           <Text style={styles.gridText}>{item.text}</Text>
-    //         </View>
-    //       ))}
-    //     </View>
-    //   </View>
-    // );
-  };
+
+function CompactReview({ name, image, review }) {
+    return (
+      <View style={styles.compactReviewContainer}>
+          <Image source={image} style={styles.compactReviewImage} />
+          <View style={styles.reviewTextContainer}>
+              <Text style={styles.reviewText}>{review}</Text>
+              <Text style={styles.userText}>- {name}</Text>
+          </View>
+      </View>
+    );
+}
 
 /* Component for displaying profile's reviews */
 function Review({ name, image, review }) {
     return (
-        <View style={styles.row}>
-            <View style={styles.horizontalCenter}>
-                <View style={[styles.imageContainer, styles.singleReview]}>
-                    <Image style={styles.profilePic} source={image} />
-                </View>
-                <View style={styles.row}>
-                    <Image style={[styles.fireIcon, {tintColor: '#D61919'}]} source={require('@/assets/images/fire-fill.png')} />
-                    <Image style={[styles.fireIcon, {tintColor: '#D61919'}]} source={require('@/assets/images/fire-fill.png')} />
-                    <Image style={[styles.fireIcon, {tintColor: '#D61919'}]} source={require('@/assets/images/fire-fill.png')} />
-                    <Image style={[styles.fireIcon, {tintColor: '#D61919'}]} source={require('@/assets/images/fire-fill.png')} />
-                    <Image style={[styles.fireIcon, {tintColor: '#DDDFE5'}]} source={require('@/assets/images/fire-fill.png')} />
-                </View>
-            </View>
-            <View style={styles.horizontalCenter}>
-                <Text style={styles.reviewText}>"{review}"</Text>
-                <Text style={styles.userText}>- {name}</Text>
-            </View>
-        </View>
+      <View style={styles.row}>
+          <View style={styles.horizontalCenter}>
+              <View style={[styles.imageContainer, styles.singleReview]}>
+                  <Image style={styles.profilePic} source={image} />
+              </View>
+              <View style={styles.row}>
+                  <Image style={[styles.fireIcon, {tintColor: '#D61919'}]} source={require('@/assets/images/fire-fill.png')} />
+                  <Image style={[styles.fireIcon, {tintColor: '#D61919'}]} source={require('@/assets/images/fire-fill.png')} />
+                  <Image style={[styles.fireIcon, {tintColor: '#D61919'}]} source={require('@/assets/images/fire-fill.png')} />
+                  <Image style={[styles.fireIcon, {tintColor: '#D61919'}]} source={require('@/assets/images/fire-fill.png')} />
+                  <Image style={[styles.fireIcon, {tintColor: '#DDDFE5'}]} source={require('@/assets/images/fire-fill.png')} />
+              </View>
+          </View>
+          <View style={styles.horizontalCenter}>
+              <Text style={styles.reviewText}>"{review}"</Text>
+              <Text style={styles.userText}>- {name}</Text>
+          </View>
+      </View>
     );
 }
 
@@ -86,106 +80,129 @@ function changeLocation() {
 /* Button for changing trip location */
 function LocationButton( ) {
     return (
-        <TouchableOpacity style={styles.locationBtn} onPress={changeLocation}>
-            <Text style={styles.locBtnText}>Vietnam</Text>
-            <Image style={styles.arrow} source={require('@/assets/images/down-arrow-icon.png')} />
-        </TouchableOpacity>
+      <TouchableOpacity style={styles.locationBtn} onPress={changeLocation}>
+          <Text style={styles.locBtnText}>Vietnam</Text>
+          <Image style={styles.arrow} source={require('@/assets/images/down-arrow-icon.png')} />
+      </TouchableOpacity>
     );
 }
 
 export default function HomeScreen() {
+
+    const handlePress = () => {
+        console.log('TouchableWithoutFeedback pressed');
+        // You can place your logic here, for example, to disable swiping on a swiper
+    };
+
+    const cards = [
+        "Card 1",
+        "Card 2",
+        "Card 3",
+    ];
+
     return (
-      <SafeAreaView style={{ flex: 1 }}>
-        <View style={styles.container}>
+      <Swiper
+        cards={cards}
+        // verticalSwipe={false}
+        // horizontalSwipe={false}
+        infinite
+        backgroundColor={'#D9D9D9'}
+        cardVerticalMargin={0}
+        stackSize={2}
+        // stackSeparation={15}
+        // allowGestureTermination={false}
+        overlayLabels={{
+            left: {
+                title: 'NOPE',
+                style: {
+                    label: {
+                        backgroundColor: 'black',
+                        borderColor: 'black',
+                        color: 'white',
+                        borderWidth: 1,
+                    },
+                    wrapper: {
+                        flexDirection: 'column',
+                        alignItems: 'flex-end',
+                        justifyContent: 'flex-start',
+                        marginTop: 30,
+                        marginLeft: -30,
+                    },
+                },
+            },
+            right: {
+                title: 'LIKE',
+                style: {
+                    label: {
+                        backgroundColor: 'black',
+                        borderColor: 'black',
+                        color: 'white',
+                        borderWidth: 1,
+                    },
+                    wrapper: {
+                        flexDirection: 'column',
+                        alignItems: 'flex-start',
+                        justifyContent: 'flex-start',
+                        marginTop: 30,
+                        marginLeft: 30,
+                    },
+                },
+            },
+        }}
+        renderCard={(card) => {
+            return (
+              <SafeAreaView style={{ flex: 1 }}>
+                  <View style={styles.container}>
+                      <View style={styles.locationBtnContainer}>
+                          <LocationButton></LocationButton>
+                      </View>
+                      <View style={[styles.profileContainer, {width: '100%', height: '85%'}]}>
+                          <View style={[styles.imageContainer, {marginBottom: 15}]}>
+                              <Image style={styles.profilePic} source={require('@/assets/images/temp-profile-pic.png')} />
+                          </View>
+                          <View style={styles.nameContainer}>
+                              <Text style={styles.nameText}>Kelly</Text>
+                              <Image style={styles.check} source={require('@/assets/images/verification-icon.png')} />
+                          </View>
+                          <Text style={styles.ageText}>39</Text>
 
-            <View style={styles.locationBtnContainer}>
-                <LocationButton></LocationButton>
-            </View>  
+                          <View style={styles.statContainer}>
+                              <View style={styles.row}>
+                                  <StatSection number={'15'} dataType={'Guided trips'} />
+                                  <StatSection number={'100'} dataType={'People guided'} />
+                                  <StatSection number={'20'} dataType={'Reviews'} />
+                              </View>
+                          </View>
 
-            <View style={[styles.profileContainer, {width: '100%', height: '85%'}]}>
-                <ScrollView contentContainerStyle={styles.scrollViewContainer}>
+                          <View style={styles.languageContainer}>
+                              <Text style={styles.subtitle}>Languages</Text>
+                              <View style={styles.row}>
+                                  <Text style={styles.normalText}>English, </Text>
+                                  <Text style={styles.normalText}>French, </Text>
+                                  <Text style={styles.normalText}>Portuguese, </Text>
+                                  <Text style={styles.normalText}>Russian </Text>
+                              </View>
+                          </View>
 
-                    <View style={[styles.imageContainer, {marginBottom: 15}]}>
-                        <Image style={styles.profilePic} source={require('@/assets/images/temp-profile-pic.png')} />
-                    </View> 
-                    <View style={styles.nameContainer}>
-                        <Text style={styles.nameText}>Kelly</Text>
-                        <Image style={styles.check} source={require('@/assets/images/verification-icon.png')} />
-                    </View>
-                    <Text style={styles.ageText}>39</Text>
-                    
-                    <View style={styles.statContainer}>
-                        <View style={styles.row}>
-                            <StatSection
-                                number={'15'}
-                                dataType={'Guided trips'}
-                            />
-                            <StatSection
-                                number={'100'}
-                                dataType={'People guided'}
-                            />
-                            <StatSection
-                                number={'20'}
-                                dataType={'Reviews'}
-                            />
-                        </View>
-                    </View>
+                          <View style={styles.tripTypeContainer}>
+                              <Text style={styles.subtitle}>Types of Trips</Text>
+                              <TripTypeGrid />
+                          </View>
 
-                    <View style={styles.languageContainer}>
-                        <Text style={styles.subtitle}>Languages</Text>
-                        <View style = {styles.row}>
-                            <Text style={styles.normalText}>English, </Text>
-                            <Text style={styles.normalText}>French, </Text>
-                            <Text style={styles.normalText}>Portuguese, </Text>
-                            <Text style={styles.normalText}>Russian </Text>
-                        </View>
-                    </View>
-
-                    <View style={styles.tripTypeContainer}>
-                        <Text style = {styles.subtitle}>Types of Trips</Text>
-                        <TripTypeGrid></TripTypeGrid>
-                        {/* <View style={styles.row}>
-                            <Image style={styles.tripTypeIcon} source={require('@/assets/images/nature-icon.png')} />
-                            <Image style={styles.tripTypeIcon} source={require('@/assets/images/culinary-icon.png')} />
-                        </View>
-                        <View>
-                            <Image style={styles.tripTypeIcon} source={require('@/assets/images/historical-icon.png')} />
-                            <Image style={styles.tripTypeIcon} source={require('@/assets/images/music-icon.png')} />
-                        </View> */}
-                    </View>
-
-                    <View style={styles.reviewsContainer}>
-                        <Text style = {styles.subtitle}>Past Trip Reviews</Text>
-                        <Review 
-                            name={"Jenny P"}
-                            image={require('@/assets/images/temp-profile-2.png')}
-                            review={"Kelly was great!"}
-                        />
-                        <Review 
-                            name={"Timmy L"}
-                            image={require('@/assets/images/temp-profile-3.png')}
-                            review={"Super chill woman"}
-                        />
-                        <Review 
-                            name={"Guy S"}
-                            image={require('@/assets/images/temp-profile-1.png')}
-                            review={"Let her guide you"}
-                        />
-                    </View>
-                </ScrollView>
-            </View>
-
-            <View style={styles.likeContainer}>
-                <TouchableOpacity>
-                    <Image style={styles.likeIcon} source={require('@/assets/images/check-icon.png')} />
-                </TouchableOpacity>
-                <TouchableOpacity>
-                    <Image style={styles.likeIcon} source={require('@/assets/images/X-icon.png')} />
-                </TouchableOpacity>
-            </View>
-            
-        </View>
-        </SafeAreaView>
+                          <View style={styles.reviewsContainer}>
+                              <Text style={styles.subtitle}>Past Trip Reviews</Text>
+                              <ScrollView nestedScrollEnabled={true} style={{flexGrow: 0, maxHeight: 100}}>
+                                  <CompactReview name={"Jenny P"} image={require('@/assets/images/temp-profile-2.png')} review={"Kelly was great!"} />
+                                  <CompactReview name={"Timmy L"} image={require('@/assets/images/temp-profile-3.png')} review={"Super chill woman"} />
+                                  <CompactReview name={"Guy S"} image={require('@/assets/images/temp-profile-1.png')} review={"Let her guide you"} />
+                              </ScrollView>
+                          </View>
+                      </View>
+                  </View>
+              </SafeAreaView>
+            );
+        }}
+      />
     );
 }
 
@@ -193,9 +210,17 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         alignItems: 'center',
-        justifyContent: 'center',
-        padding: 20,
+        justifyContent: 'flex-start', // Align content to the top
+        padding: 10, // Reduced padding
         backgroundColor: '#fff',
+    },
+    card: {
+        height: '100%',
+        borderRadius: 4,
+        borderWidth: 2,
+        borderColor: '#E8E8E8',
+        justifyContent: 'center',
+        backgroundColor: 'white',
     },
     title: {
         fontSize: 20,
@@ -246,22 +271,21 @@ const styles = StyleSheet.create({
         padding: 5,
     },
     profileContainer: {
+        width: '100%', // Ensure full width utilization
         alignItems: 'center',
         backgroundColor: '#D9D9D9',
-        padding: 0,
-        marginTop: 0,
+        padding: 10, // Reduced padding
         borderRadius: 15,
-        position: 'absolute',
     },
     statContainer: {
-        width: '95%',
-        height: 80,
-        padding: 10,
-        marginBottom: 15,
+        width: '90%', // Adjusted width
+        minHeight: 60, // Adjusted height
+        padding: 5, // Reduced padding
+        flexDirection: 'row', // Arrange items in a row
+        justifyContent: 'space-around', // Space items evenly
+        marginBottom: 10, // Reduced margin
         borderRadius: 13,
         backgroundColor: '#fff',
-        alignItems: 'center',
-        justifyContent: 'center',
     },
     languageContainer: {
         width: '95%',
@@ -272,36 +296,26 @@ const styles = StyleSheet.create({
         backgroundColor: '#fff',
         justifyContent: 'center',
     },
-    tripTypeContainer: {
-        width: '95%',
-        height: 300,
-        padding: 25,
-        marginBottom: 15,
-        borderRadius: 13,
-        backgroundColor: '#fff',
-    },
-    reviewsContainer: {
-        width: '95%',
-        height: 400,
-        padding: 25,
-        marginBottom: 15,
-        borderRadius: 13,
-        backgroundColor: '#fff',
-    },
+      tripTypeContainer: {
+          height: 80, // Adjusted height to accommodate a single row
+          width: '90%',
+          alignSelf: 'center',
+          marginBottom: 10,
+      },
     imageContainer: {
-        marginTop: 30,
+        marginTop: 10, // Reduced margin
         backgroundColor: "#2f95dc",
-        padding: 10,
-        width: 130,
-        height: 130,
-        borderRadius: 90,
+        padding: 5, // Reduced padding
+        width: 100, // Reduced size
+        height: 100, // Reduced size
+        borderRadius: 50, // Adjusted for reduced size
         overflow: 'hidden',
         alignItems: 'center',
         justifyContent: 'center',
     },
     profilePic: {
-        width: '150%',
-        height: '150%',
+        width: '100%', // Adjusted for container size
+        height: '100%', // Adjusted for container size
         resizeMode: 'cover',
     },
     nameContainer: {
@@ -356,28 +370,15 @@ const styles = StyleSheet.create({
         width: 25,
         height: 25,
         margin: -5,
-    }, 
-    reviewText: {
-        fontSize: 20, 
-        fontWeight: 'bold',
-    },
-    userText: {
-        fontSize: 13, 
-        textAlign: 'right',
     },
     singleReview: {
-        width: 60, 
-        height: 60, 
-        marginBottom: 5, 
+        width: 60,
+        height: 60,
+        marginBottom: 5,
         marginRight: 20,
     },
     flatListContent: {
         alignItems: 'center',
-    },
-    tripTypeIcon: {
-        width: 50,
-        height: 50,
-        margin: 5,
     },
     gridContainer: {
         flex: 1,
@@ -399,5 +400,54 @@ const styles = StyleSheet.create({
     gridText: {
         marginTop: 5,
         textAlign: 'center',
+    },
+    tripTypesScrollView: {
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
+    tripTypeItem: {
+        alignItems: 'center',
+        marginRight: 20, // Adjust spacing between items
+    },
+    tripTypeIcon: {
+        width: 40, // Reduced icon size
+        height: 40, // Reduced icon size
+        marginBottom: 5, // Adjust spacing
+    },
+    tripTypeText: {
+        fontSize: 12, // Adjust font size for compactness
+    },
+    compactReviewContainer: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        padding: 5,
+        marginBottom: 5,
+    },
+    compactReviewImage: {
+        width: 50, // Smaller image size
+        height: 50,
+        borderRadius: 25,
+        marginRight: 10,
+    },
+    reviewTextContainer: {
+        flex: 1,
+    },
+    reviewText: {
+        fontSize: 14, // Smaller font size
+        fontWeight: 'bold',
+    },
+    userText: {
+        fontSize: 12, // Smaller font size
+    },
+    // Keep other styles as previously defined
+    reviewsContainer: {
+        width: '90%',
+        minHeight: 100, // Adjust based on your needs
+        maxHeight: 200, // Set a maximum height to ensure it fits on screen
+        overflow: 'hidden', // Hide overflow
+        padding: 10,
+        marginBottom: 10,
+        borderRadius: 13,
+        backgroundColor: '#fff',
     },
 });
