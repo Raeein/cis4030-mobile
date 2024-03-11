@@ -71,7 +71,7 @@ const styles = StyleSheet.create({
         width: 250,
         borderRadius: 12,
         padding: 15,
-        marginBottom: 20,
+        marginBottom: 30,
     }, 
     eventName: {
         fontSize: 20,
