@@ -38,7 +38,15 @@ const UserTrips: React.FC<UserTripsProps> = ({ data, navigation }) => {
             {
                 showInfo && <TripInfoToggle events={data.events}/>
             }
-            <ActionButton title={"See Full Schedule"} onPress={HandleSeeSchedule}/>
+          
+            <ActionButton 
+                title={"See Full Schedule"} 
+                onPress={HandleSeeSchedule}
+                buttonColor={'#F38957'}
+                textColor='white'
+                borderRadius={10}
+                width={200}
+            />
         </View>
     )
 }

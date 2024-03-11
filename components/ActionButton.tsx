@@ -5,12 +5,18 @@ interface ActionButtonProps {
     title: string,
     buttonColor?: string,
     textColor?: string,
-    onPress: () => void
+    onPress: () => void,
+    height?: number 
+    width?: number,
+    borderRadius?: number,
+    alignSelf?: string
 }
 
-const ActionButton: React.FC<ActionButtonProps> = ({ title, buttonColor, textColor, onPress }) => {
+const ActionButton: React.FC<ActionButtonProps> = ({ title, buttonColor, textColor, onPress, height, width, borderRadius, alignSelf }) => {
     return (
-        <TouchableOpacity style={[styles.container, { backgroundColor: buttonColor ?? '#D9D9D9' }]} onPress={onPress}>
+        <TouchableOpacity 
+            style={[styles.container, { backgroundColor: buttonColor ?? '#D9D9D9', height: height ?? 40, width: width ?? 140, borderRadius: borderRadius ?? 20 }]} 
+            onPress={onPress}>
             <Text style={[styles.title, { color: textColor ?? 'black' }]}>{title}</Text>
         </TouchableOpacity>
     )
