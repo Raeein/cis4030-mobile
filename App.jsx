@@ -70,14 +70,14 @@ export default function App() {
                         tabBarIcon: ({ color }) => <TabBarIcon IconComponent={AntDesign} name="clockcircleo" color={color} />,
                     }}
                 />
-                <Tab.Screen
-                    name="Profile"
-                    component={ProfileScreen}
-                    options={{
-                        headerShown: false,
-                        tabBarIcon: ({ color }) => <TabBarIcon IconComponent={Ionicons} name="person" color={color} />,
-                    }}
-                />
+                {/*<Tab.Screen*/}
+                {/*    name="Profile"*/}
+                {/*    component={ProfileScreen}*/}
+                {/*    options={{*/}
+                {/*        headerShown: false,*/}
+                {/*        tabBarIcon: ({ color }) => <TabBarIcon IconComponent={Ionicons} name="person" color={color} />,*/}
+                {/*    }}*/}
+                {/*/>*/}
                 <Tab.Screen
                     name="Itinerary"
                     component={ItineraryStack}
