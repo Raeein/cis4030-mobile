@@ -14,7 +14,7 @@ const Schedule: React.FC<UserTripData> = ({data}) => {
     return (
         <View style={styles.container}>
             <Text style={styles.tripTitle}>{data.name}</Text>
-            <Text style={styles.tripSubtitle}>{data.location}, {formatDate(data.dateStart)} - {formatDate(data.dateEnd)}</Text>
+            <Text style={styles.tripSubtitle}>{data.location} • {formatDate(data.dateStart)} - {formatDate(data.dateEnd)}</Text>
             <View style={styles.eventContainer}>
                 <ScrollView style={styles.scroll}>
                     {data.events.map((event, index) => (
