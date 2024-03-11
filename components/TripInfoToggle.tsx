@@ -16,7 +16,7 @@ const TripInfoToggle: React.FC<TripInfoToggleProps> = ({ events, navigation }) =
             { events &&
                 events.map((event, index) => {
                     return (
-                        <View>
+                        <View key={index}>
                             <View key={index} style={styles.eventHeader}>
                                 <View style={styles.dateHeader}>
                                     <Text style={styles.numDay}>15</Text>  

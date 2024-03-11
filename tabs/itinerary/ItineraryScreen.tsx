@@ -26,7 +26,10 @@ export default function ItineraryScreen({ navigation }) {
       <EventBox data={events} image={'@/assets/images/carnival.png'} />
       <Text style={styles.h1}>Your trips</Text> 
       <UserTrips data={userTripData} navigation={navigation}/>
-      <ActionButton title={"Add Trip"} buttonColor='#F0A365' textColor='white' onPress={handleAddTrip}/>
+      <View style={{ flex: 1, marginTop: 20}}>
+        <ActionButton title={"Add Trip"} buttonColor='#F0A365' textColor='white' onPress={handleAddTrip} height={40} width={200} borderRadius={10}/>  
+      </View>
+      
     </ScrollView>
   );
 }
