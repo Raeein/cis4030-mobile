@@ -1,5 +1,5 @@
 import React from "react";
-import { View, Text, StyleSheet } from 'react-native' 
+import { View, Text, StyleSheet, ScrollView } from 'react-native' 
 import {UserTripData, Event} from '@/types';
 import userData from '@/assets/info/userTrips.json'
 
@@ -11,14 +11,19 @@ const Schedule: React.FC<UserTripData> = ({data}) => {
             <Text style={styles.tripTitle}>{data.name}</Text>
             <Text style={styles.tripSubtitle}>{data.location}, {data.dateStart} - {data.dateEnd}</Text>
             <View style={styles.eventContainer}>
-                {data.events.map((event, index) => (
-                    <View key={index}>
-                        <Text style={styles.eventDate}>{event.date}</Text>
-                        <View style={styles.eventNameContainer}>
-                            <Text style={styles.eventName}>{event.name}</Text>
+                <ScrollView style={styles.scroll}>
+                    {data.events.map((event, index) => (
+                        <View key={index}>
+                            <View style={styles.eventDateContainer}>
+                                <Text style={[styles.eventDate, {marginBottom: 3}]}>{event.date}</Text>
+                            </View>
+                            <Text style={[styles.eventDate, {marginBottom: 10}]}>9:00 AM</Text>
+                            <View style={styles.eventNameContainer}>
+                                <Text style={styles.eventName}>{event.name}</Text>
+                            </View>
                         </View>
-                    </View>
-                ))}
+                    ))}
+                </ScrollView>
             </View>
         </View>
     )
@@ -32,37 +37,51 @@ const FullScheduleScreen = () => {
 
 const styles = StyleSheet.create({
     container: {
-        alignItems: 'center',
+        alignItems: 'flex-start',
         width: '100%',
-        padding: 15
+        padding: 30
     }, 
     tripTitle: {
         color: '#F38957',
-        fontSize: 26,
+        fontSize: 35,
         fontWeight: '800',
         paddingBottom: 5
     },
     tripSubtitle: {
         fontSize: 16,
-        marginBottom: 20,
+        fontWeight: 'bold',
+        color: '#708090',
+        marginBottom: 40,
     },
     eventContainer: {
-        flexDirection: 'row',
         justifyContent: 'space-between',
-        alignItems: 'center',
-        padding: 10,
-        borderBottomWidth: 1,
-        borderBottomColor: '#ccc',
+        alignItems: 'flex-start',
+        width: '100%',
+    },
+    scroll: {
+
     },
     eventNameContainer: {
         backgroundColor: '#F0A365',
-        width: '90%',
+        width: 250,
+        borderRadius: 12,
+        padding: 15,
+        marginBottom: 20,
     }, 
     eventName: {
-        fontSize: 16,
+        fontSize: 20,
+        fontWeight: 'bold',
+        color: "#FFF",
+    },
+    eventDateContainer: {
+        marginBottom: 10,
+        width: 300,
+        borderBottomWidth: 1,
+        borderBottomColor: '#000',
     },
     eventDate: {
-
+        fontSize: 20,
+        fontWeight: 'bold',
     }
 });
 
