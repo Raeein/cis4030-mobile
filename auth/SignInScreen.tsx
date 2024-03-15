@@ -1,76 +1,53 @@
 import React, { useState } from 'react';
-import { StyleSheet, View, Text, TextInput, TouchableOpacity, Alert } from 'react-native';
+import { ActivityIndicator, StyleSheet, View, Text, TouchableOpacity, Alert } from 'react-native';
 import Colors from "@/constants/Colors";
-import { Formik } from 'formik';
-import * as Yup from 'yup';
-
+import { supabase } from '../lib/supabase';
+import { Button, Input } from 'react-native-elements';
 
 export default function SignInScreen({ route }) {
   const { onAuthentication } = route.params;
 
-  const SignInSchema = Yup.object().shape({
-    email: Yup.string().email('Invalid email').required('Email is required'),
-    password: Yup.string().min(6, 'Password must be at least 6 characters').required('Password is required'),
-  });
-
-
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [loading, setLoading] = useState(false);
 
-  const handleSignInPress = () => {
-    onAuthentication();
-  };
+  async function signInWithEmail() {
+    setLoading(true);
+    const { error } = await supabase.auth.signInWithPassword({
+      email: email,
+      password: password,
+    });
 
-  const handleForgotPasswordPress = () => {
-    Alert.alert(
-      "Feature Not Available",
-      "This feature is not yet implemented.",
-      [
-        { text: "OK" }
-      ]
-    );
-  };
+    if (error) Alert.alert("Error", error.message);
+    else onAuthentication();
+
+    setLoading(false);
+  }
 
   return (
     <View style={styles.container}>
       <Text style={styles.header}>Sign In</Text>
-      <Formik
-        initialValues={{ email: '', password: '' }}
-        validationSchema={SignInSchema}
-        onSubmit={(values) => {
-          onAuthentication();
-          // Handle authentication here with values.email and values.password
-        }}
-      >
-        {({ handleChange, handleBlur, handleSubmit, values, errors, touched }) => (
-          <>
-            <TextInput
-              style={styles.inputField}
-              placeholder="Email"
-              onChangeText={handleChange('email')}
-              onBlur={handleBlur('email')}
-              value={values.email}
-              keyboardType="email-address"
-              autoCapitalize="none"
-            />
-            {touched.email && errors.email && <Text style={styles.errorText}>{errors.email}</Text>}
-            <TextInput
-              style={styles.inputField}
-              placeholder="Password"
-              onChangeText={handleChange('password')}
-              onBlur={handleBlur('password')}
-              value={values.password}
-              secureTextEntry
-            />
-            {touched.password && errors.password && <Text style={styles.errorText}>{errors.password}</Text>}
-            <TouchableOpacity style={styles.signInButton} onPress={handleSubmit}>
-              <Text style={styles.signInButtonText}>Sign In</Text>
-            </TouchableOpacity>
-          </>
+      <Input
+        label="Email"
+        placeholder="Email"
+        onChangeText={setEmail}
+        value={email}
+        keyboardType="email-address"
+        autoCapitalize="none"
+      />
+      <Input
+        label="Password"
+        placeholder="Password"
+        onChangeText={setPassword}
+        value={password}
+        secureTextEntry
+      />
+      <TouchableOpacity style={styles.signInButton} onPress={signInWithEmail} disabled={loading}>
+        {loading ? (
+          <ActivityIndicator size="small" color="#FFF" />
+        ) : (
+          <Text style={styles.signInButtonText}>Sign In</Text>
         )}
-      </Formik>
-      <TouchableOpacity onPress={handleForgotPasswordPress}>
-        <Text style={styles.forgotPasswordText}>Forgot Password?</Text>
       </TouchableOpacity>
     </View>
   );
@@ -112,11 +89,6 @@ const styles = StyleSheet.create({
   signInButtonText: {
     fontSize: 18,
     color: '#FFF',
-  },
-  forgotPasswordText: {
-    marginTop: 20,
-    color: '#FF5733',
-    fontSize: 16,
   },
   errorText: {
     color: 'red',

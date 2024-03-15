@@ -14,19 +14,33 @@ import TabBarIcon from "./components/TabBarIcon";
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import Ionicons from 'react-native-vector-icons/Ionicons';
+import { Session } from '@supabase/supabase-js'
+import { supabase } from './lib/supabase'
+import 'react-native-url-polyfill/auto'
 
 const Tab = createBottomTabNavigator();
 
 
 
 export default function App() {
-    // AsyncStorage.clear()
-    //     .then(() => {
-    //         console.log('Storage successfully cleared!');
-    //     })
+    AsyncStorage.clear()
+        .then(() => {
+            console.log('Storage successfully cleared!');
+        })
+    const [session, setSession] = useState<Session | null>(null);
     const [isLoading, setIsLoading] = useState(true);
     const [isOnboarded, setIsOnboarded] = useState(false);
     const [isAuthenticated, setIsAuthenticated] = useState(false);
+
+    useEffect(() => {
+        supabase.auth.getSession().then(({ data: { session } }) => {
+            setSession(session)
+        })
+
+        supabase.auth.onAuthStateChange((_event, session) => {
+            setSession(session)
+        })
+    }, [])
 
     // Check AsyncStorage to see if the user has onboarded
     useEffect(() => {
