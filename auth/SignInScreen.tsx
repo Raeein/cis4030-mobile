@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { ActivityIndicator, StyleSheet, View, Text, TouchableOpacity, Alert } from 'react-native';
 import Colors from "@/constants/Colors";
 import { supabase } from '../lib/supabase';
+import { signIn } from "@/lib/Auth";
 import { Button, Input } from 'react-native-elements';
 
 export default function SignInScreen({ route }) {
@@ -13,14 +14,15 @@ export default function SignInScreen({ route }) {
 
   async function signInWithEmail() {
     setLoading(true);
-    const { error } = await supabase.auth.signInWithPassword({
-      email: email,
-      password: password,
-    });
+    try {
+      await signIn(email, password);
+      Alert.alert("Success", "You have signed in successfully.");
 
-    if (error) Alert.alert("Error", error.message);
-    else onAuthentication();
-
+      // onAuthentication();
+    }
+    catch (error) {
+      Alert.alert("Error", error.message);
+    }
     setLoading(false);
   }
 

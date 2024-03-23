@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { createContext, useContext, useState, useEffect } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -17,9 +17,11 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 import { Session } from '@supabase/supabase-js'
 import { supabase } from './lib/supabase'
 import 'react-native-url-polyfill/auto'
+import { isUserAuthenticated, isUserOnboarded} from './lib/Auth'
+
+const AuthContext = createContext();
 
 const Tab = createBottomTabNavigator();
-
 
 
 export default function App() {
@@ -27,6 +29,7 @@ export default function App() {
         .then(() => {
             console.log('Storage successfully cleared!');
         })
+
     const [session, setSession] = useState<Session | null>(null);
     const [isLoading, setIsLoading] = useState(true);
     const [isOnboarded, setIsOnboarded] = useState(false);
@@ -42,17 +45,23 @@ export default function App() {
         })
     }, [])
 
-    // Check AsyncStorage to see if the user has onboarded
     useEffect(() => {
-        const checkOnboarding = async () => {
-            const hasOnboarded = await AsyncStorage.getItem('hasOnboarded');
-            const hasAuthenticated = await AsyncStorage.getItem('isAuthenticated');
-            setIsOnboarded(hasOnboarded === 'true');
-            setIsAuthenticated(hasAuthenticated === 'true');
+        const initializeApp = async () => {
+
+            const isAuthenticated = await isUserAuthenticated();
+            setIsAuthenticated(isAuthenticated);
+
+            if (isAuthenticated) {
+                const hasOnboarded = await isUserOnboarded();
+                setIsOnboarded(hasOnboarded);
+            } else {
+                setIsOnboarded(false);
+            }
+
             setIsLoading(false);
         };
 
-        checkOnboarding();
+        initializeApp();
     }, []);
 
     if (isLoading) {

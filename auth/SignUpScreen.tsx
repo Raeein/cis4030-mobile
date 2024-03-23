@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { ActivityIndicator, StyleSheet, View, Text, TouchableOpacity, Alert } from 'react-native';
 import Colors from "@/constants/Colors";
-import { supabase } from '../lib/supabase';
 import { Input } from 'react-native-elements';
+import { signUp } from '@/lib/Auth';
 
 export default function SignUpScreen({ navigation }) {
   const [email, setEmail] = useState('');
@@ -11,16 +11,15 @@ export default function SignUpScreen({ navigation }) {
 
   async function signUpWithEmail() {
     setLoading(true);
-    const { error } = await supabase.auth.signUp({
-      email: email,
-      password: password,
-    });
 
-    if (error) Alert.alert("Error", error.message);
-    else {
-      Alert.alert("Success", "Please check your inbox for email verification!");
-      navigation.navigate('SignIn'); // Optionally navigate to SignIn upon successful sign up
+    try {
+      await signUp(email, password);
+      Alert.alert("Success", "Please sign in to continue.");
+      navigation.navigate('SignIn');
+    } catch (error) {
+      Alert.alert("Error", error.message);
     }
+
     setLoading(false);
   }
 
