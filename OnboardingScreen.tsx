@@ -1,17 +1,16 @@
 import {StyleSheet, View, Text, Image} from 'react-native';
 import Onboarding from 'react-native-onboarding-swiper';
-import AsyncStorage from '@react-native-async-storage/async-storage';
+import { useAuth } from "@/AuthContext";
 
 import Colors from "@/constants/Colors";
 
-export default function OnboardingScreen({ onComplete }) {
+export default function OnboardingScreen() {
+  const { setOnboarded } = useAuth();
 
   const completeOnboarding = async () => {
     try {
-      await AsyncStorage.setItem('hasOnboarded', 'true');
+      await setOnboarded(true);
       console.log('Onboarding completed and status saved');
-      onComplete();
-      // router.replace("/(auth)/auth/");
     } catch (e) {
       console.error('Failed to save the onboarding status', e);
     }

@@ -41,31 +41,31 @@ const checkOnboarding = async (user) => {
   }
 };
 
-const isUserOnboarded = async() => {
-  let user = await supabase.auth.getUser();
-  const id = user.data.user.id;
-
-  let { data, error } = await supabase
-    .from('users')
-    .select('*')
-    .eq('id', id)
-    .single();
-  if (error) {
-    console.error('Error checking onboarding status:', error);
-    return;
-  }
-  if (data?.onboarded) {
-    console.log('User has completed onboarding');
-    return true;
-  } else {
-    console.log('User has not completed onboarding');
-  }
-  return false;
-}
+// const onboarding = async() => {
+//   let user = await supabase.auth.getUser();
+//   const id = user.data.user.id;
+//
+//   let { data, error } = await supabase
+//     .from('users')
+//     .select('*')
+//     .eq('id', id)
+//     .single();
+//   if (error) {
+//     console.error('Error checking onboarding status:', error);
+//     return;
+//   }
+//   if (data?.onboarded) {
+//     console.log('User has completed onboarding');
+//     return true;
+//   } else {
+//     console.log('User has not completed onboarding');
+//   }
+//   return false;
+// }
 
 const isUserAuthenticated = async () => {
   const user = await supabase.auth.getUser();
   return user.data.user !== null;
 }
 
-export { signUp, signIn, signOut, isUserAuthenticated, isUserOnboarded };
+export { signUp, signIn, signOut, isUserAuthenticated };

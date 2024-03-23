@@ -5,7 +5,7 @@ import ChatScreen from "./ChatScreen";
 
 const Stack = createNativeStackNavigator();
 
-export function MatchingTabStack() {
+const MatchingTabStack = () => {
     return (
         <Stack.Navigator>
             <Stack.Screen name="Matches" component={MatchesScreen} />
@@ -14,3 +14,5 @@ export function MatchingTabStack() {
         </Stack.Navigator>
     );
 }
+
+export default MatchingTabStack;
