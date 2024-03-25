@@ -10,9 +10,11 @@ import languages from '@/assets/info/languages.json';
 import DropDownSelect from '@/components/DropDownSelect';
 import BubbleBox from '@/components/BubbleBox';
 import { ProfileInfo } from '@/types';
+import { supabase } from '@/lib/supabase';
 
 export default function SignUpBackgroundScreen({ navigation }) {
-
+  console.log(supabase)
+  
   const handleNextPress = () => {
     navigation.navigate('SignUpInterests');
   };

@@ -1,4 +1,5 @@
 import React from 'react';
+import { Button } from 'react-native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import HomeScreen from './tabs/home/HomeScreen';
 import ProfileScreen from './tabs/profile/ProfileScreen';
@@ -26,8 +27,15 @@ const MainTabNavigator = () => {
         name="Profile"
         component={ProfileScreen}
         options={{
-          headerShown: false,
+          headerShown: true,
           tabBarIcon: ({ color }) => <TabBarIcon IconComponent={Ionicons} name="person" color={color} />,
+          headerRight: () => (
+            <Button
+              onPress={() => alert('Saved')}
+              title="Done"
+              // color="#00cc00"
+            />
+          ),
         }}
       />
       <Tab.Screen

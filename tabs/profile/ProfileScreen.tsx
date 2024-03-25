@@ -1,36 +1,18 @@
 import React from 'react';
-import { Alert, StyleSheet, View, Text, Button } from 'react-native';
-import AsyncStorage from '@react-native-async-storage/async-storage';
-import { supabase } from '@/lib/supabase';
+import { Alert, StyleSheet, View, Text, Button, Image } from 'react-native';
+import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
+import ViewProfileScreen from './ViewProfileScreen';
+import EditProfileScreen from './EditProfileScreen';
 
-export default function ProfileScreen({ navigation }) {
-  const handleLogout = async () => {
-    const { error } = await supabase.auth.signOut();
-    if (error) {
-      console.error('Logout failed:', error.message);
-    } else {
-      console.log('Logged out successfully');
-    }
-  };
+const Tab = createMaterialTopTabNavigator();
 
-  const handleClearStorage = async () => {
-    try {
-      await AsyncStorage.clear();
-      Alert.alert('Storage Cleared', 'All data in AsyncStorage has been cleared.');
-    } catch (e) {
-      console.error('Failed to clear AsyncStorage:', e);
-      Alert.alert('Error', 'Failed to clear AsyncStorage.');
-    }
-  };
 
+export default function ProfileScreenTabs() {
   return (
-    <View style={styles.container}>
-      <Text style={styles.title}>Profile Screen</Text>
-      <View style={styles.separator} lightColor="#eee" darkColor="rgba(255,255,255,0.1)" />
-      <Button title="Logout" onPress={handleLogout} />
-      <View style={styles.buttonSpacing} />
-      <Button title="Clear Storage" onPress={handleClearStorage} />
-    </View>
+    <Tab.Navigator>
+      <Tab.Screen name="View" component={ViewProfileScreen} />
+      <Tab.Screen name="Edit" component={EditProfileScreen} />
+    </Tab.Navigator>
   );
 }
 
