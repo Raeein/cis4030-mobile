@@ -2,18 +2,23 @@ import React from 'react';
 import { StyleSheet, View, Text, Image, TouchableOpacity } from 'react-native';
 import ActionButton from './ActionButton';
 
-type TripInfo = {
-    title: string,
-    date: string,
-    location: string
-}
-
 interface EventBoxProps {
-    data: TripInfo,
-    image: string
+    data: {
+        name: {
+            text: string;
+        };
+        venue: {
+            address: {
+                city: string;
+            };
+        };
+        logo: {
+            url: string;
+        };
+    };
 }
 
-const EventBox: React.FC<EventBoxProps> = ({ data, image }) => {
+const EventBox: React.FC<EventBoxProps> = ({ data }) => {
     const HandleAddEvent= () => {
         console.log('Handle See Event Info Click');
     }
@@ -25,9 +30,10 @@ const EventBox: React.FC<EventBoxProps> = ({ data, image }) => {
 
     return (
         <View style={styles.container}>
-            <Text style={styles.title}>{data.title}</Text>
-            <Text style={styles.date}>{data.date}</Text>
-            <Image source={require('@/assets/images/carnival.png')} style={styles.image}></Image>
+            <Text style={styles.title}>{data.name.text}</Text>
+            {/* <Text style={styles.date}>{data.date}</Text> */}
+            {/* <Text style={styles.date}>{data.venue.address.city}</Text> */}
+            <Image source={{ uri: data.logo.url }} style={styles.image}></Image>
             <View style={styles.btnCtnr}>
                 <ActionButton title={"Add"} onPress={HandleAddEvent} />
                 <ActionButton title={"Send"} onPress={HandleSendEvent}/>
