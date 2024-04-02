@@ -34,7 +34,7 @@ export default function ItineraryScreen({ navigation }) {
                 });
                 const data = await response.json();
                 setEvents(data);
-                // console.log("data", data.name.text);
+                console.log("data", data.name.text);
                 // if (Array.isArray(data)) {
                 //     setEvents(data);
                 // } else {
@@ -60,7 +60,7 @@ export default function ItineraryScreen({ navigation }) {
             </View>
             <Text style={styles.heading}>Events starting from: </Text>
             {/* {events.map((event, index) => ( */}
-                <EventBox data={events} />
+                <EventBox data={events}s />
             {/* ))} */}
             <Text style={styles.heading}>Your trips</Text>
             <UserTrips data={userTripData} navigation={navigation} />

@@ -7,6 +7,12 @@ interface EventBoxProps {
         name: {
             text: string;
         };
+        start: {
+            local: string;
+        };
+        end: {
+            local: string;
+        };
         venue: {
             address: {
                 city: string;
@@ -31,8 +37,7 @@ const EventBox: React.FC<EventBoxProps> = ({ data }) => {
     return (
         <View style={styles.container}>
             <Text style={styles.title}>{data.name.text}</Text>
-            {/* <Text style={styles.date}>{data.date}</Text> */}
-            {/* <Text style={styles.date}>{data.venue.address.city}</Text> */}
+            <Text style={styles.date}>{data.start.local.substring(0, data.start.local.indexOf('T'))}</Text>
             <Image source={{ uri: data.logo.url }} style={styles.image}></Image>
             <View style={styles.btnCtnr}>
                 <ActionButton title={"Add"} onPress={HandleAddEvent} />
