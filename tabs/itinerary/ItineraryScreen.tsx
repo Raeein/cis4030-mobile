@@ -24,6 +24,11 @@ export default function ItineraryScreen({ navigation }) {
         console.log(selectedCity);
     };
 
+    const handleEventClick = (data) => {
+        console.log('Handle Event Click');
+        navigation.navigate('Event', {data});
+    }   
+
     useEffect(() => {
 
         const fetchEvents = async () => {
@@ -73,7 +78,7 @@ export default function ItineraryScreen({ navigation }) {
             </View>
             {/* <Text style={styles.heading}>Events starting from: </Text> */}
             {events.map((event, index) => (
-                <EventBox key={index} data={event} />
+                <EventBox key={index} data={event} onClick={() => handleEventClick(event)}/>
             ))}
             <Text style={styles.heading}>Your trips</Text>
             <UserTrips data={userTripData} navigation={navigation} />
