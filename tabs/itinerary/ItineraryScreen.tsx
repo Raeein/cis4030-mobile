@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { StyleSheet, View, Text, ScrollView } from 'react-native';
+import Swiper from 'react-native-swiper';
 import DropDownSelect from '@/components/DropDownSelect';
 import ActionButton from '@/components/ActionButton';
 import EventBox from '@/components/EventBox';
@@ -76,10 +77,12 @@ export default function ItineraryScreen({ navigation }) {
                     select={handleCityChange}
                 />
             </View>
-            {/* <Text style={styles.heading}>Events starting from: </Text> */}
-            {events.map((event, index) => (
-                <EventBox key={index} data={event} onClick={() => handleEventClick(event)}/>
-            ))}
+            <Text style={styles.heading}>Local events in {selectedCity.substring(0, selectedCity.indexOf(','))}</Text>
+            <Swiper style={styles.wrapper} loop={false}>
+                {events.map((event, index) => (
+                    <EventBox key={index} data={event} onClick={() => handleEventClick(event)}/>
+                ))}
+            </Swiper>
             <Text style={styles.heading}>Your trips</Text>
             <UserTrips data={userTripData} navigation={navigation} />
             <View style={{ flex: 1, marginTop: 20 }}>
@@ -113,4 +116,9 @@ const styles = StyleSheet.create({
         alignSelf: 'flex-start',
         padding: 15,
     },
+    wrapper: {
+        alignSelf: 'center',
+        height: 500,
+        marginLeft: 20,
+    }
 });

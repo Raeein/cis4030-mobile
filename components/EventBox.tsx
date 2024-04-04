@@ -21,6 +21,13 @@ interface EventBoxProps {
         logo: {
             url: string;
         };
+        description: {
+           text: string; 
+        };
+        organizer: {
+            name: string;
+        };
+        summary: string;
     };
     onClick: (event: any) => void;
 }
