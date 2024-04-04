@@ -4,6 +4,7 @@ import { StyleSheet, View, Text, ScrollView, Image, Button } from 'react-native'
 import * as ImagePicker from 'expo-image-picker';
 import BubbleBox from '@/components/BubbleBox';
 import { supabase } from '@/lib/supabase';
+import * as defUser from '@/assets/info/defUser.json'
 
 type Img = 'img1' | 'img2' | 'img3';
 
@@ -11,10 +12,10 @@ export default function EditProfileScreen() {
     const [userId, setUserId] = useState('');
     const [firstName, setFirstName] = useState('');
     const [age, setAge] = useState(0);
-    const [languages, setLanguages] = useState([])
-    const [ethnicity, setEthnicity] = useState('')
-    const [interests, setInterests] = useState([])
-    const [imgUrls, setImgUrls] = useState([])
+    const [languages, setLanguages] = useState<string[]>([]);
+    const [placesToTravel, setTravelPlaces] = useState<string[]>([]);
+    const [interests, setInterests] = useState<string[]>([]);
+    const [imgUrls, setImgUrls] = useState<string[]>([]);
     const [img1, setImg1] = useState('');
     const [img2, setImg2] = useState('');
     const [img3, setImg3] = useState('');
@@ -38,6 +39,20 @@ export default function EditProfileScreen() {
         }
     };
 
+    const setDefaultUser = () => {
+      console.log(defUser);
+      setFirstName(defUser.firstname);
+      setLanguages(defUser.languages);
+      setTravelPlaces(defUser.travelPlaces);
+      setInterests(defUser.interests);
+      setAge(defUser.age);
+      setImgUrls(defUser.imgUrls);
+      setImg1(defUser.imgUrls[0]);
+      console.log(imgUrls[0]);
+      setImg2(imgUrls[1]);
+      setImg3(imgUrls[2]);
+    }
+
     useEffect(() => {
       const getUserInfo = async () => {
         const user = await supabase.auth.getUser()
@@ -52,17 +67,14 @@ export default function EditProfileScreen() {
           .eq('id', userId)
 
           if (error) {
-
-            console.log('Could not fetch data: ' + error);
-          }
-          if (data) {
+            setDefaultUser();
+          } else {
             setFirstName(data[0].first_name);
             setLanguages(data[0].languages);
-            setEthnicity(data[0].ethnicity);
+            setTravelPlaces(defUser.travelPlaces);
             setInterests(data[0].interests);
             setAge(data[0].age);
             setImgUrls(data[0].photo_urls);
-
             setImg1(imgUrls[0]);
             setImg2(imgUrls[1]);
             setImg3(imgUrls[2]);
@@ -96,7 +108,13 @@ export default function EditProfileScreen() {
               }
             </View>
           </View>
-          <Text style={[styles.h1, {paddingBottom: 10}]}>Ethnicity: {ethnicity}</Text>
+          <Text style={styles.h1}>Places I want to go</Text>
+          <View style={styles.bubbleContainer}>
+            { placesToTravel.map((lang, index) => {
+               return (<BubbleBox key={index} name={lang} color={"#F38957"}/>)
+              })
+            }
+          </View>
           <Text style={styles.h1}>Languages</Text>
           <View style={styles.bubbleContainer}>
             { languages.map((lang, index) => {

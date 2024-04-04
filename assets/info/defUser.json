@@ -1,0 +1,29 @@
+{
+    "firstname": "Kevin",
+    "lastname": "James",
+    "languages": [
+        "English",
+        "Spanish",
+        "Vietnamese",
+        "Polish",
+        "French"
+    ],
+    "travelPlaces": [
+        "Kenya",
+        "Saigon",
+        "Dublin",
+        "Belfast"
+    ],
+    "interests": [
+        "Scootering",
+        "Leetcode",
+        "Motorbiking",
+        "Tennis"
+    ],
+    "age": 24,
+    "imgUrls": [
+        "@/assets/images/headshot1.png",
+        "@/assets/images/headshot1.png",
+        "@/assets/images/headshot1.png"
+    ]
+}
