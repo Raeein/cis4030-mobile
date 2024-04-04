@@ -33,11 +33,18 @@ const EventBox: React.FC<EventBoxProps> = ({ data }) => {
         console.log('Handle Send Event Click');
     }
 
+    const formatDate = (dateString) => {
+        const date = new Date(dateString);
+        const options = { month: 'long', day: 'numeric', year: 'numeric' };
+        return date.toLocaleDateString('en-US', options);
+    }
 
     return (
         <View style={styles.container}>
-            <Text style={styles.title}>{data.name.text}</Text>
-            <Text style={styles.date}>{data.start.local.substring(0, data.start.local.indexOf('T'))}</Text>
+            <View style={styles.titleBox}>
+               <Text style={styles.title}>{data.name.text}</Text> 
+            </View>
+            <Text style={styles.date}>{formatDate(data.start.local.substring(0, data.start.local.indexOf('T')))}</Text>
             <Image source={{ uri: data.logo.url }} style={styles.image}></Image>
             <View style={styles.btnCtnr}>
                 <ActionButton title={"Add"} onPress={HandleAddEvent} />
@@ -50,14 +57,15 @@ const EventBox: React.FC<EventBoxProps> = ({ data }) => {
 const styles = StyleSheet.create({ 
     container: {
         flex: 1,
-        height: 400,
+        height: 450,
         width: '90%',
         backgroundColor: 'white',
         borderRadius: 20,
         justifyContent: 'flex-start',
         alignItems: 'center',
         padding: 10,
-        paddingTop: 30
+        paddingTop: 30,
+        marginBottom: 10,
     },
     image: {
         width: '94%',
@@ -65,9 +73,14 @@ const styles = StyleSheet.create({
         borderRadius: 15,
         marginTop: 10,
     },
+    titleBox: {
+        height: 70
+    },
     title: {
         fontWeight: '700',
         fontSize: 22,
+        paddingLeft: 10,
+        paddingRight: 10,
     },
     date: {
         fontWeight: '400',
@@ -77,7 +90,7 @@ const styles = StyleSheet.create({
         flex: 1,
         flexDirection: 'row',
         padding: 10,
-        marginTop: 20
+        marginTop: 20,
     }
 })
 

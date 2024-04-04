@@ -6,6 +6,7 @@ import EventBox from '@/components/EventBox';
 import cities from '@/assets/info/cities.json';
 import userData from '@/assets/info/userTrips.json';
 import UserTrips from '@/components/UserTrips';
+import eventData from '@/assets/info/events.json';
 
 export default function ItineraryScreen({ navigation }) {
     const [events, setEvents] = useState([]);
@@ -17,29 +18,41 @@ export default function ItineraryScreen({ navigation }) {
         navigation.navigate('Trip');
     };
 
-    const handleCityChange = async (city) => {
+    const handleCityChange = (city) => {
         console.log('Handle City Change', city);
         setSelectedCity(city);
+        console.log(selectedCity);
     };
 
     useEffect(() => {
+
         const fetchEvents = async () => {
             try {
-                const response = await fetch('https://www.eventbriteapi.com/v3/events/875025985277/', {
-                    method: 'GET',
-                    headers: {
-                        Authorization: 'Bearer N6AAKEJO22HNNPCPYGWD',
-                        'Content-Type': 'application/json',
-                    },
-                });
-                const data = await response.json();
-                setEvents(data);
-                console.log("data", data.name.text);
-                // if (Array.isArray(data)) {
-                //     setEvents(data);
-                // } else {
-                //     console.error('Invalid data format received from the API:', data);
-                // }
+                const cityObject = eventData.events.find(cityObj => cityObj.city === selectedCity);
+
+                if (cityObject) {
+                    const eventsPromises = cityObject.ids.map(async eventId => {
+                        const url = 'https://www.eventbriteapi.com/v3/events/' + eventId + '/'
+                        const response = await fetch(url, {
+                            method: 'GET',
+                            headers: {
+                                Authorization: 'Bearer N6AAKEJO22HNNPCPYGWD',
+                                'Content-Type': 'application/json',
+                            },
+                        });
+                        const eventData = await response.json();
+                        return eventData;
+                    });
+
+                    const eventsData = await Promise.all(eventsPromises);
+
+                    setEvents(eventsData);
+                    // console.log("data", eventsData);
+                }
+                else {
+                    console.error('City not found in JSON data');
+                }
+                    
             } catch (error) {
                 console.error('Error fetching events:', error);
             }
@@ -55,13 +68,13 @@ export default function ItineraryScreen({ navigation }) {
                     boxColor="#F38957"
                     textColor="#FFFFFF"
                     boxText={cities.information[0]}
-                    onSelect={handleCityChange}
+                    select={handleCityChange}
                 />
             </View>
-            <Text style={styles.heading}>Events starting from: </Text>
-            {/* {events.map((event, index) => ( */}
-              <EventBox data={events} />
-            {/* ))} */}
+            {/* <Text style={styles.heading}>Events starting from: </Text> */}
+            {events.map((event, index) => (
+                <EventBox key={index} data={event} />
+            ))}
             <Text style={styles.heading}>Your trips</Text>
             <UserTrips data={userTripData} navigation={navigation} />
             <View style={{ flex: 1, marginTop: 20 }}>
