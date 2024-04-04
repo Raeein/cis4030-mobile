@@ -1,6 +1,7 @@
 import React from 'react';
 import { StyleSheet, View, Text, ScrollView, Image } from 'react-native';
 import { useRoute } from '@react-navigation/native';
+import colors from '../../constants/Colors';
 
 export default function EventScreen() {
 	const route = useRoute();
@@ -45,13 +46,15 @@ const styles = StyleSheet.create ({
 		borderRadius: 10,
 	},
 	heading: {
-        fontWeight: '700',
-        fontSize: 25,
+        fontWeight: '800',
+        fontSize: 30,
         alignSelf: 'flex-start',
 		marginBottom: 10,
+		color: 'black',
+		// color: '#FF6600',
     },
 	split: {
-		marginBottom: 20,
+		marginBottom: 40,
 	},
 	subtitle: {
 		fontWeight: '700',
