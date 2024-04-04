@@ -8,7 +8,7 @@ import userData from '@/assets/info/userTrips.json';
 import UserTrips from '@/components/UserTrips';
 
 export default function ItineraryScreen({ navigation }) {
-    const [events, setEvents] = useState();
+    const [events, setEvents] = useState([]);
     const [selectedCity, setSelectedCity] = useState('');
     const userTripData = userData.trips;
 
@@ -25,7 +25,7 @@ export default function ItineraryScreen({ navigation }) {
     useEffect(() => {
         const fetchEvents = async () => {
             try {
-                const response = await fetch('https://www.eventbriteapi.com/v3/events/49216045517/', {
+                const response = await fetch('https://www.eventbriteapi.com/v3/events/875025985277/', {
                     method: 'GET',
                     headers: {
                         Authorization: 'Bearer N6AAKEJO22HNNPCPYGWD',
@@ -60,7 +60,7 @@ export default function ItineraryScreen({ navigation }) {
             </View>
             <Text style={styles.heading}>Events starting from: </Text>
             {/* {events.map((event, index) => ( */}
-                <EventBox data={events}s />
+              <EventBox data={events} />
             {/* ))} */}
             <Text style={styles.heading}>Your trips</Text>
             <UserTrips data={userTripData} navigation={navigation} />
