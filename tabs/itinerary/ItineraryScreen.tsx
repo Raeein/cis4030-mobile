@@ -18,7 +18,7 @@ export default function ItineraryScreen({ navigation }) {
 
     const handleAddTrip = () => {
         console.log('Handle Add Trip');
-        navigation.navigate('Trip');
+        navigation.navigate('Trip', {selectedCity});
     };
 
     const handleCityChange = (city) => {
@@ -89,7 +89,7 @@ export default function ItineraryScreen({ navigation }) {
                     select={handleCityChange}
                 />
             </View>
-            <Text style={styles.heading}>Local events in {selectedCity.substring(0, selectedCity.indexOf(','))}</Text>
+            <Text style={styles.heading}>Local events</Text>
 
             {loading ? ( // Show loading indicator if loading is true
                 <View style={styles.loadingContainer}>

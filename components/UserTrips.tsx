@@ -78,7 +78,8 @@ const styles = StyleSheet.create({
         flex: 1,
         flexDirection: 'row',
         gap: 5,
-        marginTop: 10
+        marginTop: 10,
+        marginBottom: 10,
     },
     icon: {
         height: 20,
