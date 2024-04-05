@@ -1,11 +1,18 @@
 import React, {useState} from "react";
-import { Text, View, StyleSheet, TouchableOpacity, Image, TextInput } from 'react-native';
+import { Text, View, StyleSheet, TouchableOpacity, Image, TextInput, Alert } from 'react-native';
+import { useRoute } from "@react-navigation/native";
+import DropDownSelect from "@/components/DropDownSelect";
 import DateTimePicker from '@react-native-community/datetimepicker';
 import userTripData from '@/assets/info/userTrips.json';
-import ActionButton from "@/components/ActionButton";
+import cities from '@/assets/info/cities.json';
+// import ActionButton from "@/components/ActionButton";
 
-const AddTripScreen = ({ navigation }) => {
+const AddTripScreen = ({ route, navigation }) => {
     const trips = userTripData.trips;
+	const { selectedCity } = route.params;
+
+    const [tripName, setTripName] = useState('');
+    const [location, setLocation] = useState('');
     const [startDate, setStartDate] = useState(new Date());
     const [endDate, setEndDate] = useState(new Date());
 
@@ -22,6 +29,19 @@ const AddTripScreen = ({ navigation }) => {
     
     const HandleAddTrip = () => {
         console.log('Add trip');
+
+        if (!tripName) {
+            Alert.alert('Please give your trip a name.');
+            return;
+        }
+
+        const newTrip = {
+            name: tripName,
+            location: location,
+            startDate: startDate.toISOString(),
+            endDate: endDate.toISOString()
+        }
+
         navigation.navigate('Events');
     }
 
@@ -31,13 +51,19 @@ const AddTripScreen = ({ navigation }) => {
             <View style={styles.row}>
                 <Text style={styles.h1}>Name:</Text> 
                 <View style={styles.inputContainer}>
-                    <TextInput style={styles.input}></TextInput>
+                    <TextInput style={styles.input} onChangeText={setTripName}></TextInput>
                 </View>
             </View>
             <View style={styles.row}>
                 <Text style={styles.h1}>Location:</Text>
-                <View style={styles.inputContainer2}>
-                    <TextInput style={styles.input}></TextInput>
+                <View style={styles.dropDownContainer}>
+                    <DropDownSelect
+                        item={cities}
+                        boxColor="#F38957"
+                        textColor="#FFFFFF"
+                        boxText={selectedCity}
+                        select={setLocation}
+                    />
                 </View>
             </View>
             <View style={styles.row}>
@@ -177,8 +203,14 @@ const styles = StyleSheet.create({
     datePicker: {
         alignSelf: 'center',
         marginTop: 15,
-        marginBottom: 15
+        marginBottom: 15,
     },
+    dropDownContainer: {
+        width: 175,
+        marginLeft: 20,
+        marginBottom: 10,
+        marginTop: 5,
+    }
 })
 
 export default AddTripScreen;

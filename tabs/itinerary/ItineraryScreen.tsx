@@ -18,7 +18,7 @@ export default function ItineraryScreen({ navigation }) {
 
     const handleAddTrip = () => {
         console.log('Handle Add Trip');
-        navigation.navigate('Trip');
+        navigation.navigate('Trip', {selectedCity});
     };
 
     const handleCityChange = (city) => {
