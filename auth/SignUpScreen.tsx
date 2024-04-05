@@ -14,7 +14,7 @@ export default function SignUpScreen({ navigation }) {
 
     try {
       await signUp(email, password);
-      Alert.alert("Success", "Please sign in to continue.");
+      Alert.alert("Success", "Please continue to onboard your account.");
     } catch (error) {
       Alert.alert("Error", error.message);
     }

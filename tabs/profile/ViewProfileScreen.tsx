@@ -1,6 +1,9 @@
 import React from 'react';
 import { SafeAreaView, StyleSheet, View, Text, Image, ScrollView, TouchableOpacity, TouchableWithoutFeedback, Button } from 'react-native';
 import Colors from "@/constants/Colors";
+import { supabase } from '@/lib/supabase';
+import AsyncStorage from "@react-native-async-storage/async-storage";
+
 
 const tripTypes = [
     {source: require('@/assets/images/nature-icon.png'), text: "nature"},
@@ -62,10 +65,8 @@ export default function EditProfileScreen() {
     const handleClearStorage = async () => {
         try {
             await AsyncStorage.clear();
-            Alert.alert('Storage Cleared', 'All data in AsyncStorage has been cleared.');
         } catch (e) {
             console.error('Failed to clear AsyncStorage:', e);
-            Alert.alert('Error', 'Failed to clear AsyncStorage.');
         }
     };
 
@@ -117,7 +118,7 @@ export default function EditProfileScreen() {
             </View>
             <Button title="Logout" onPress={handleLogout} />
             <View style={styles.buttonSpacing} />
-            <Button title="Clear Storage" onPress={handleClearStorage} /> 
+            <Button title="Clear Storage" onPress={handleClearStorage} />
         </ScrollView>
     );
 }
