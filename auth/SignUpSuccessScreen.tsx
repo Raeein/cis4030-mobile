@@ -1,6 +1,6 @@
 import React from 'react';
 import { useEffect } from 'react';
-import SuccessFrame from '@/components/SuccessPage'
+import SuccessFrame from '@/tabs/home/SuccessPage'
 
 export default function SignUpSuccessScreen({ route }) {
   const { onAuthentication } = route.params;
