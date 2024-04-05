@@ -2,13 +2,14 @@ import React from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 
 interface BubbleBoxProps {
-    name: string
+    name: string,
+    color?: string
 }
 
-const BubbleBox: React.FC<BubbleBoxProps> = ({ name }) => {
+const BubbleBox: React.FC<BubbleBoxProps> = ({ name, color }) => {
     return (
         <>
-            <TouchableOpacity style={styles.bubble}>
+            <TouchableOpacity style={[styles.bubble, color ? {backgroundColor: color} : {}]}>
                 <Text style={styles.bubbleText}>{name}</Text>
             </TouchableOpacity>
         </>
