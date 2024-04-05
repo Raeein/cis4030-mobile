@@ -171,7 +171,7 @@ export default function HomeScreen({ navigation }) {
                 },
             },
         }}
-        renderCard={(card) => {
+        renderCard={(card, cardIndex) => {
             return (
               <SafeAreaView style={{ flex: 1, borderRadius: 20 }}>
                   <View style={styles.container}>
@@ -180,8 +180,15 @@ export default function HomeScreen({ navigation }) {
                       </View>
                       <View style={[styles.profileContainer, {width: '100%', height: '85%'}]}>
                           <View style={[styles.imageContainer, {marginBottom: 15}]}>
-                              {/* <Image style={styles.profilePic} source={{uri: '@/assets/images/headshot1.png'}} /> */}
-                              <Image style={styles.profilePic} source={require('@/assets/images/headshot1.png')} />
+                                {/* <Image style={styles.profilePic} source={require('@/assets/images/headshot1.png')} /> */}
+                                {cardIndex === 0 ? (
+                                    <Image style={styles.profilePic} source={require('@/assets/images/guide2.png')} />
+                                ) : cardIndex === 1 ? (
+                                    <Image style={styles.profilePic} source={require('@/assets/images/headshot1.png')} />
+                                ) : cardIndex === 2 ? (
+                                    <Image style={styles.profilePic} source={require('@/assets/images/guide3.png')} />
+                                ) : null}
+                                 
                           </View>
                           <View style={styles.nameContainer}>
                               <Text style={styles.nameText}>{card.name}</Text>
