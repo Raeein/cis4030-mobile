@@ -99,7 +99,16 @@ function onSwipeRight(status, navigation) {
 
     console.log(status);
     if (status === "yes") {
+        // Update users on messages
         navigation.navigate('Success');
+
+
+        // add notification on matching tab
+
+        // callback to re-render and update matches
+
+
+        
     }
 }
 
@@ -164,7 +173,7 @@ export default function HomeScreen({ navigation }) {
         }}
         renderCard={(card) => {
             return (
-              <SafeAreaView style={{ flex: 1 }}>
+              <SafeAreaView style={{ flex: 1, borderRadius: 20 }}>
                   <View style={styles.container}>
                       <View style={styles.locationBtnContainer}>
                           <LocationButton></LocationButton>
@@ -196,20 +205,10 @@ export default function HomeScreen({ navigation }) {
                                 })}
                               </View>
                           </View>
-
                           <View style={styles.tripTypeContainer}>
                               <Text style={styles.subtitle}>Types of Trips</Text>
                               <TripTypeGrid />
                           </View>
-{/* 
-                          <View style={styles.reviewsContainer}>
-                              <Text style={styles.subtitle}>Past Trip Reviews</Text>
-                              <ScrollView nestedScrollEnabled={true} style={{flexGrow: 0, maxHeight: 100}}>
-                                  <CompactReview name={"Jenny P"} image={require('@/assets/images/temp-profile-2.png')} review={"Kelly was great!"} />
-                                  <CompactReview name={"Timmy L"} image={require('@/assets/images/temp-profile-3.png')} review={"Super chill woman"} />
-                                  <CompactReview name={"Guy S"} image={require('@/assets/images/temp-profile-1.png')} review={"Let her guide you"} />
-                              </ScrollView>
-                          </View> */}
                       </View>
                   </View>
               </SafeAreaView>
@@ -220,7 +219,7 @@ export default function HomeScreen({ navigation }) {
             const userData = userCards.guides[cardIndex];
             onSwipeRight(userData.status, navigation)
         }}
-        onSwipedLeft={onSwipeLeft}
+        // onSwipedLeft={onSwipeLeft}
       />
     );
 }
@@ -232,12 +231,13 @@ const styles = StyleSheet.create({
         justifyContent: 'flex-start', // Align content to the top
         padding: 10, // Reduced padding
         backgroundColor: '#fff',
+        borderRadius: 20
     },
     card: {
         height: '100%',
         borderRadius: 4,
         borderWidth: 2,
-        borderColor: '#E8E8E8',
+        borderColor: '#F38957',
         justifyContent: 'center',
         backgroundColor: 'white',
     },
