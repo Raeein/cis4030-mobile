@@ -1,0 +1,67 @@
+{
+    "guides": [
+        {
+            "name": "Kelly",
+            "age": 45,
+            "guidedTrips": 15,
+            "peopleGuided": 100,
+            "reviews": 20,
+            "languages": [
+                "English", 
+                "French",
+                "Portuguese",
+                "Russian"
+            ],
+            "tripTypes": [
+                "nature",
+                "culinary",
+                "historical",
+                "music"
+            ],
+            "mainImg": "@/assets/images/headshot2.png",
+            "status": "no"
+        },
+        {
+            "name": "Bob",
+            "age": 35,
+            "guidedTrips": 5,
+            "peopleGuided": 25,
+            "reviews": 4,
+            "languages": [
+                "English", 
+                "Vietnamese",
+                "French"
+            ],
+            "tripTypes": [
+                "nature",
+                "culinary",
+                "music"
+            ],
+            "mainImg": "@/assets/images/guide2.png",
+            "status": "yes"
+        },
+        {
+            "name": "Kevin",
+            "age": 45,
+            "guidedTrips": 13,
+            "peopleGuided": 57,
+            "reviews": 3,
+            "languages": [
+                "English", 
+                "Mandarin",
+                "Swedish",
+                "Gaelic"
+            ],
+            "tripTypes": [
+                "nature",
+                "culinary",
+                "historical",
+                "music"
+            ],
+            "mainImg": "@/assets/images/guide3.png",
+            "status": "no"
+        }
+    ]
+}
+
+
