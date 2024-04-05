@@ -10,9 +10,10 @@ interface DropdownProps {
     boxColor?: string,
     textColor?: string,
     borderRadius?: number,
+    select: (selectedItem: any, index: number) => void
 }
 
-const DropDownSelect: React.FC<DropdownProps> = ({ item, boxText, boxColor, textColor }) => {
+const DropDownSelect: React.FC<DropdownProps> = ({ item, boxText, boxColor, textColor, select }) => {
     var rowItems =  item.information;
     
     return (
@@ -20,7 +21,7 @@ const DropDownSelect: React.FC<DropdownProps> = ({ item, boxText, boxColor, text
             <SelectDropdown 
                 data={rowItems} 
                 onSelect={(selectedItem, index) => {
-                    // console.log(selectedItem, index);
+                    select(selectedItem, index);
                 }}
                 buttonTextAfterSelection={(selectedItem, index) => {
                     return selectedItem;

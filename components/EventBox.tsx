@@ -2,18 +2,37 @@ import React from 'react';
 import { StyleSheet, View, Text, Image, TouchableOpacity } from 'react-native';
 import ActionButton from './ActionButton';
 
-type TripInfo = {
-    title: string,
-    date: string,
-    location: string
-}
-
 interface EventBoxProps {
-    data: TripInfo,
-    image: string
+    data: {
+        name: {
+            text: string;
+        };
+        start: {
+            local: string;
+        };
+        end: {
+            local: string;
+        };
+        venue: {
+            address: {
+                city: string;
+            };
+        };
+        logo: {
+            url: string;
+        };
+        description: {
+           text: string; 
+        };
+        organizer: {
+            name: string;
+        };
+        summary: string;
+    };
+    onClick: (event: any) => void;
 }
 
-const EventBox: React.FC<EventBoxProps> = ({ data, image }) => {
+const EventBox: React.FC<EventBoxProps> = ({ data, onClick }) => {
     const HandleAddEvent= () => {
         console.log('Handle See Event Info Click');
     }
@@ -22,12 +41,21 @@ const EventBox: React.FC<EventBoxProps> = ({ data, image }) => {
         console.log('Handle Send Event Click');
     }
 
+    const formatDate = (dateString) => {
+        const date = new Date(dateString);
+        const options = { month: 'long', day: 'numeric', year: 'numeric' };
+        return date.toLocaleDateString('en-US', options);
+    }
 
     return (
         <View style={styles.container}>
-            <Text style={styles.title}>{data.title}</Text>
-            <Text style={styles.date}>{data.date}</Text>
-            <Image source={require('@/assets/images/carnival.png')} style={styles.image}></Image>
+            <View style={styles.titleBox}>
+               <Text style={styles.title}>{data.name.text}</Text> 
+            </View>
+            <Text style={styles.date}>{formatDate(data.start.local.substring(0, data.start.local.indexOf('T')))}</Text>
+            <TouchableOpacity style={styles.imgWrapper} onPress={() => onClick(data)}>
+                <Image source={{ uri: data.logo.url }} style={styles.image}></Image>
+            </TouchableOpacity>
             <View style={styles.btnCtnr}>
                 <ActionButton title={"Add"} onPress={HandleAddEvent} />
                 <ActionButton title={"Send"} onPress={HandleSendEvent}/>
@@ -39,24 +67,38 @@ const EventBox: React.FC<EventBoxProps> = ({ data, image }) => {
 const styles = StyleSheet.create({ 
     container: {
         flex: 1,
-        height: 400,
+        height: 450,
         width: '90%',
         backgroundColor: 'white',
         borderRadius: 20,
         justifyContent: 'flex-start',
         alignItems: 'center',
         padding: 10,
-        paddingTop: 30
+        paddingTop: 30,
+        marginBottom: 10,
     },
-    image: {
+    imgWrapper: {
         width: '94%',
         height: 225,
         borderRadius: 15,
         marginTop: 10,
     },
+    image: {
+        width: '100%',
+        height: '100%',
+        // width: '94%',
+        // height: 225,
+        borderRadius: 15,
+        // marginTop: 10,
+    },
+    titleBox: {
+        height: 70
+    },
     title: {
         fontWeight: '700',
         fontSize: 22,
+        paddingLeft: 10,
+        paddingRight: 10,
     },
     date: {
         fontWeight: '400',
@@ -66,7 +108,7 @@ const styles = StyleSheet.create({
         flex: 1,
         flexDirection: 'row',
         padding: 10,
-        marginTop: 20
+        marginTop: 20,
     }
 })
 
