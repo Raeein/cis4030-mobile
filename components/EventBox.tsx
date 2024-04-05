@@ -58,7 +58,7 @@ const EventBox: React.FC<EventBoxProps> = ({ data, onClick }) => {
             </TouchableOpacity>
             <View style={styles.btnCtnr}>
                 <ActionButton title={"Add"} onPress={HandleAddEvent} />
-                <ActionButton title={"Send"} onPress={HandleSendEvent}/>
+                {/* <ActionButton title={"Send"} onPress={HandleSendEvent}/> */}
             </View>
         </View>
     )
@@ -109,6 +109,7 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         padding: 10,
         marginTop: 20,
+        width: 150,
     }
 })
 
