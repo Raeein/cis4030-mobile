@@ -15,7 +15,7 @@ const signIn = async (email, password) => {
     password: password,
   });
 
-  const user = await supabase.auth.getUser()
+  // const user = await supabase.auth.getUser()
 
   if (error) throw error;
 }

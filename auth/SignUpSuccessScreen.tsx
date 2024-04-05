@@ -1,13 +1,15 @@
 import React from 'react';
 import { useEffect } from 'react';
-import SuccessFrame from '@/tabs/home/SuccessPage'
+import SuccessFrame from '@/tabs/home/SuccessPage';
+import { useAuth } from "@/AuthContext";
 
-export default function SignUpSuccessScreen({ route }) {
-  const { onAuthentication } = route.params;
+export default function SignUpSuccessScreen() {
+  const { setAdditionalInfoProvided } = useAuth();
+
 
   useEffect(() => {
     const timer = setTimeout(() => {
-      onAuthentication();
+      setAdditionalInfoProvided(true);
     }, 2000);
 
     // Cleanup timeout if the component unmounts before the timeout completes
