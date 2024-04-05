@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { StyleSheet, View, Text, ScrollView, TextInput, TouchableOpacity, Image } from 'react-native';
+import { StyleSheet, View, Text, ScrollView, TextInput, TouchableOpacity, Image, KeyboardAvoidingView } from 'react-native';
 
 export default function ChatScreen({ route, navigation }) {
     const { userName, userImage } = route.params;
@@ -28,7 +28,7 @@ export default function ChatScreen({ route, navigation }) {
     };
 
     return (
-        <View style={styles.container}>
+        <KeyboardAvoidingView style={styles.container} behavior="padding" keyboardVerticalOffset={100}>
             <View style={styles.header}>
                 <Image source={{ uri: userImage }} style={styles.userImage} />
                 <Text style={styles.userName}>{userName}</Text>
@@ -59,7 +59,7 @@ export default function ChatScreen({ route, navigation }) {
                     <Text style={styles.sendButtonText}>Send</Text>
                 </TouchableOpacity>
             </View>
-        </View>
+        </KeyboardAvoidingView>
     );
 }
 

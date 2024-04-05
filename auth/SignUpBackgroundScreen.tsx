@@ -23,7 +23,7 @@ export default function SignUpBackgroundScreen({ navigation }) {
     <ScrollView contentContainerStyle={styles.container}>
       <Text style={signUpStyles.h1}>Step 2: Background</Text>
       {dropDowns.map((item, index) => (
-        <DropDownSelect key={index} item={item} />
+        <DropDownSelect key={index} item={item} select={() => {}}/>
       ))}
       <View style={styles.languages}>
         <Text style={styles.h2}>Languages</Text>

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { ActivityIndicator, StyleSheet, View, Text, TouchableOpacity, Alert } from 'react-native';
+import { ActivityIndicator, StyleSheet, KeyboardAvoidingView, Text, TouchableOpacity, Alert } from 'react-native';
 import Colors from "@/constants/Colors";
 import { Input } from 'react-native-elements';
 import { signUp } from '@/lib/Auth';
@@ -15,7 +15,6 @@ export default function SignUpScreen({ navigation }) {
     try {
       await signUp(email, password);
       Alert.alert("Success", "Please sign in to continue.");
-      navigation.navigate('SignIn');
     } catch (error) {
       Alert.alert("Error", error.message);
     }
@@ -24,7 +23,7 @@ export default function SignUpScreen({ navigation }) {
   }
 
   return (
-    <View style={styles.container}>
+    <KeyboardAvoidingView style={styles.container} behavior="padding">
       <Text style={styles.header}>Sign Up</Text>
       <Input
         label="Email"
@@ -48,7 +47,7 @@ export default function SignUpScreen({ navigation }) {
           <Text style={styles.signUpButtonText}>Sign Up</Text>
         )}
       </TouchableOpacity>
-    </View>
+    </KeyboardAvoidingView>
   );
 }
 

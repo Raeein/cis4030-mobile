@@ -1,16 +1,30 @@
-import React from 'react';
-import { View, TextInput, Text, StyleSheet, ScrollView } from 'react-native';
+import React, { useState } from 'react';
+import {View, TextInput, Text, StyleSheet, ScrollView, Platform, Button} from 'react-native';
 import { Formik } from 'formik';
 import OrangePrimaryButton from '@/components/OrangePrimaryButton';
 import Colors from "@/constants/Colors";
 import * as Yup from 'yup';
+import DateTimePicker from '@react-native-community/datetimepicker';
 
 export default function SignUpInfoScreen({ navigation }) {
+  const [date, setDate] = useState(new Date());
+  const [show, setShow] = useState(false);
   const handleFormSubmit = (values) => {
     console.log('Form submitted!');
     // console.log(values);
     navigation.navigate('SignUpPhoto');
   };
+
+  const onChange = (event, selectedDate) => {
+    const currentDate = selectedDate || date;
+    setShow(Platform.OS === 'ios');
+    setDate(currentDate);
+  };
+
+  const showDatePicker = () => {
+    setShow(true);
+  };
+
 
   const SignupSchema = Yup.object().shape({
     firstName: Yup.string().required('First name is required'),
@@ -21,16 +35,8 @@ export default function SignUpInfoScreen({ navigation }) {
       .min(6, 'Password must be at least 6 characters')
       .required('Password is required'),
 
-    dateOfBirth: Yup.string()
-      .required('Date of birth is required')
-      .matches(/^\d{2}\/\d{2}\/\d{4}$/, 'Invalid date of birth, format should be MM/DD/YYYY')
-      .test('dateOfBirth', 'Date of birth cannot be in the future', value => {
-        const today = new Date();
-        const parts = value.split('/');
-        const dob = new Date(`${parts[2]}-${parts[0]}-${parts[1]}`);
-        return dob <= today;
-      }),
-
+    dateOfBirth: Yup.date()
+      .max(new Date(), 'Date of birth cannot be in the future')
   });
 
   let initialValues;
@@ -42,26 +48,6 @@ export default function SignUpInfoScreen({ navigation }) {
     password: '',
     dateOfBirth: ''
   }
-
-  // if (__DEV__) {
-  //   initialValues = {
-  //     firstName: 'John',
-  //     lastName: 'Doe',
-  //     email: 'a@a.com',
-  //     phoneNumber: '1234567890',
-  //     password: 'password',
-  //     dateOfBirth: '01/01/2000'
-  //   }
-  // } else {
-  //   initialValues = {
-  //     firstName: '',
-  //     lastName: '',
-  //     email: '',
-  //     phoneNumber: '',
-  //     password: '',
-  //     dateOfBirth: ''
-  //   }
-  // }
 
   return (
     <ScrollView contentContainerStyle={styles.container}>
@@ -128,13 +114,18 @@ export default function SignUpInfoScreen({ navigation }) {
               placeholder="Password"
               secureTextEntry={true}
             />
-            <TextInput
-              onChangeText={handleChange('dateOfBirth')}
-              onBlur={handleBlur('dateOfBirth')}
-              style={styles.textInput}
-              value={values.dateOfBirth}
-              placeholder="Date of Birth: MM/DD/YYYY"
-            />
+            <Button onPress={showDatePicker} title="Choose Date of Birth" />
+            {show && (
+              <DateTimePicker
+                testID="dateTimePicker"
+                value={date}
+                mode={'date'}
+                is24Hour={true}
+                display="default"
+                onChange={onChange}
+              />
+            )}
+
             {Object.keys(errors).map((key) => touched[key] && <Text style={styles.errorText} key={key}>{errors[key]}</Text>)}
             <OrangePrimaryButton title="Next" onPress={handleSubmit} />
           </View>

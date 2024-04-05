@@ -27,9 +27,9 @@ export default function SignUpInterestsScreen({ navigation }) {
         </ScrollView>
       </View>
       <Text style={styles.h2}>I want to travel to</Text>
-      <DropDownSelect item={countries} boxText={"1: "} />
-      <DropDownSelect item={countries} boxText={"2: "} />
-      <DropDownSelect item={countries} boxText={"3: "} />
+      <DropDownSelect item={countries} boxText={"1: "} select={() => {}}/>
+      <DropDownSelect item={countries} boxText={"2: "} select={() => {}}/>
+      <DropDownSelect item={countries} boxText={"3: "} select={() => {}}/>
       <View style={{ width: '100%' }}>
         <OrangePrimaryButton title="Next" onPress={handleNextPress}/>
       </View>

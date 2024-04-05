@@ -3,6 +3,9 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import AuthStack from './auth/AuthStack';
+import SignUpInfoScreen from './auth/SignUpInfoScreen';
+import { supabase } from '@/lib/supabase';
+
 
 import OnboardingScreen from './OnboardingScreen';
 import 'react-native-url-polyfill/auto'
@@ -20,16 +23,39 @@ export default function Root() {
   //   .then(() => {
   //     console.log('Storage successfully cleared!');
   //   })
-  const { isAuthenticated, isOnboarded, isLoading } = useAuth();
+  // supabase.auth.signOut()
+  //   .then(() => {
+  //       console.log('Signed out successfully!')
+  //     }
+  //   )
+  const { isAuthenticated, isOnboarded, additionalInfoProvided } = useAuth();
 
   const renderScreen = () => {
-    if (!isOnboarded) {
-      return <OnboardingScreen />;
-    } else if (!isAuthenticated) {
-      return <AuthStack />;
+    console.log("RENDER SCREEN")
+    console.log("isOnboarded in render screen is ", isOnboarded)
+    console.log("isAuthenticated", isAuthenticated)
+    console.log("additionalInfoProvided in render screen is: ", additionalInfoProvided)
+    // if additionalInfoProvided is undefined, set it to false
+    let infoProvided;
+    if (additionalInfoProvided === undefined) {
+      infoProvided = false;
     } else {
-      return <MainTabNavigator />;
+      infoProvided = additionalInfoProvided;
     }
+    if (!isAuthenticated) {
+      console.log("Not authenticated")
+      return <AuthStack />;
+    }
+    if (isAuthenticated && !isOnboarded) {
+      console.log("Authenticated but not onboarded")
+      return <OnboardingScreen />;
+    }
+    if (isAuthenticated && !infoProvided) {
+      console.log("Authenticated but additional info not provided")
+      return <AuthStack initialRouteName='SignUpInfo' />;
+    }
+    console.log("Authenticated and onboarded")
+    return <MainTabNavigator />;
   };
 
   return (

@@ -1,24 +1,20 @@
 import React, { useState } from 'react';
-import { ActivityIndicator, StyleSheet, View, Text, TouchableOpacity, Alert } from 'react-native';
+import { ActivityIndicator, StyleSheet, KeyboardAvoidingView, Text, TouchableOpacity, Alert } from 'react-native';
 import Colors from "@/constants/Colors";
-import { supabase } from '../lib/supabase';
 import { signIn } from "@/lib/Auth";
-import { Button, Input } from 'react-native-elements';
+import { Input } from 'react-native-elements';
 
-export default function SignInScreen({ route }) {
-  const { onAuthentication } = route.params;
+export default function SignInScreen({ navigation }) {
 
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  // TODO: Remove the default values for email and password
+  const [email, setEmail] = useState('t@t.com');
+  const [password, setPassword] = useState('123456');
   const [loading, setLoading] = useState(false);
 
   async function signInWithEmail() {
     setLoading(true);
     try {
       await signIn(email, password);
-      Alert.alert("Success", "You have signed in successfully.");
-
-      // onAuthentication();
     }
     catch (error) {
       Alert.alert("Error", error.message);
@@ -27,7 +23,7 @@ export default function SignInScreen({ route }) {
   }
 
   return (
-    <View style={styles.container}>
+    <KeyboardAvoidingView style={styles.container} behavior="padding">
       <Text style={styles.header}>Sign In</Text>
       <Input
         label="Email"
@@ -51,7 +47,7 @@ export default function SignInScreen({ route }) {
           <Text style={styles.signInButtonText}>Sign In</Text>
         )}
       </TouchableOpacity>
-    </View>
+    </KeyboardAvoidingView>
   );
 }
 
