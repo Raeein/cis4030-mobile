@@ -2,6 +2,8 @@ import React from 'react';
 import { SafeAreaView, StyleSheet, View, Text, Image, ScrollView, TouchableOpacity, TouchableWithoutFeedback } from 'react-native';
 import Colors from "@/constants/Colors";
 import Swiper from 'react-native-deck-swiper';
+import * as matchPool from '@/assets/info/matchPool.json';
+import * as userCards from '@/assets/info/userCards.json';
 
 const tripTypes = [
     {source: require('@/assets/images/nature-icon.png'), text: "nature"},
@@ -87,22 +89,42 @@ function LocationButton( ) {
     );
 }
 
-export default function HomeScreen() {
+function showCard({card}) {
+    console.log(card);
+    console.log("Hello");
+}
 
+function onSwipeRight(status, navigation) {
+    console.log("HandleSwipeRight");
+
+    console.log(status);
+    if (status === "yes") {
+        // Update users on messages
+        navigation.navigate('Success');
+
+
+        // add notification on matching tab
+
+        // callback to re-render and update matches
+
+
+        
+    }
+}
+
+function onSwipeLeft() {
+    console.log("HandleSwipeLeft")
+}
+
+export default function HomeScreen({ navigation }) {
     const handlePress = () => {
         console.log('TouchableWithoutFeedback pressed');
         // You can place your logic here, for example, to disable swiping on a swiper
     };
 
-    const cards = [
-        "Card 1",
-        "Card 2",
-        "Card 3",
-    ];
-
     return (
       <Swiper
-        cards={cards}
+        cards={userCards.guides}
         // verticalSwipe={false}
         // horizontalSwipe={false}
         infinite
@@ -151,57 +173,53 @@ export default function HomeScreen() {
         }}
         renderCard={(card) => {
             return (
-              <SafeAreaView style={{ flex: 1 }}>
+              <SafeAreaView style={{ flex: 1, borderRadius: 20 }}>
                   <View style={styles.container}>
                       <View style={styles.locationBtnContainer}>
                           <LocationButton></LocationButton>
                       </View>
                       <View style={[styles.profileContainer, {width: '100%', height: '85%'}]}>
                           <View style={[styles.imageContainer, {marginBottom: 15}]}>
-                              <Image style={styles.profilePic} source={require('@/assets/images/temp-profile-pic.png')} />
+                              {/* <Image style={styles.profilePic} source={{uri: '@/assets/images/headshot1.png'}} /> */}
+                              <Image style={styles.profilePic} source={require('@/assets/images/headshot1.png')} />
                           </View>
                           <View style={styles.nameContainer}>
-                              <Text style={styles.nameText}>Kelly</Text>
+                              <Text style={styles.nameText}>{card.name}</Text>
                               <Image style={styles.check} source={require('@/assets/images/verification-icon.png')} />
                           </View>
-                          <Text style={styles.ageText}>39</Text>
+                          <Text style={styles.ageText}>{card.age}</Text>
 
                           <View style={styles.statContainer}>
                               <View style={styles.row}>
-                                  <StatSection number={'15'} dataType={'Guided trips'} />
-                                  <StatSection number={'100'} dataType={'People guided'} />
-                                  <StatSection number={'20'} dataType={'Reviews'} />
+                                  <StatSection number={card.guidedTrips} dataType={'Guided trips'} />
+                                  <StatSection number={card.peopleGuided} dataType={'People guided'} />
+                                  <StatSection number={card.reviews} dataType={'Reviews'} />
                               </View>
                           </View>
 
                           <View style={styles.languageContainer}>
                               <Text style={styles.subtitle}>Languages</Text>
                               <View style={styles.row}>
-                                  <Text style={styles.normalText}>English, </Text>
-                                  <Text style={styles.normalText}>French, </Text>
-                                  <Text style={styles.normalText}>Portuguese, </Text>
-                                  <Text style={styles.normalText}>Russian </Text>
+                                {card.languages.map((lang, index) => {
+                                    return <Text key={index} style={styles.normalText}>{lang} </Text>
+                                })}
                               </View>
                           </View>
-
                           <View style={styles.tripTypeContainer}>
                               <Text style={styles.subtitle}>Types of Trips</Text>
                               <TripTypeGrid />
-                          </View>
-
-                          <View style={styles.reviewsContainer}>
-                              <Text style={styles.subtitle}>Past Trip Reviews</Text>
-                              <ScrollView nestedScrollEnabled={true} style={{flexGrow: 0, maxHeight: 100}}>
-                                  <CompactReview name={"Jenny P"} image={require('@/assets/images/temp-profile-2.png')} review={"Kelly was great!"} />
-                                  <CompactReview name={"Timmy L"} image={require('@/assets/images/temp-profile-3.png')} review={"Super chill woman"} />
-                                  <CompactReview name={"Guy S"} image={require('@/assets/images/temp-profile-1.png')} review={"Let her guide you"} />
-                              </ScrollView>
                           </View>
                       </View>
                   </View>
               </SafeAreaView>
             );
         }}
+        onTapCard={() => console.log("Clicked on card")}
+        onSwipedRight={(cardIndex) => {
+            const userData = userCards.guides[cardIndex];
+            onSwipeRight(userData.status, navigation)
+        }}
+        // onSwipedLeft={onSwipeLeft}
       />
     );
 }
@@ -213,12 +231,13 @@ const styles = StyleSheet.create({
         justifyContent: 'flex-start', // Align content to the top
         padding: 10, // Reduced padding
         backgroundColor: '#fff',
+        borderRadius: 20
     },
     card: {
         height: '100%',
         borderRadius: 4,
         borderWidth: 2,
-        borderColor: '#E8E8E8',
+        borderColor: '#F38957',
         justifyContent: 'center',
         backgroundColor: 'white',
     },

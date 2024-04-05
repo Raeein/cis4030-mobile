@@ -1,19 +1,26 @@
 import React from 'react';
-import { View, Text, StyleSheet, Image, ActivityIndicator } from 'react-native';
+import { View, Text, StyleSheet, Image, TouchableOpacity } from 'react-native';
+import { useState, useEffect } from 'react';
 
-interface SuccessFrameProps {
-    uri: string;
-    message: string;
-}
+// interface SuccessFrameProps {
+//     uri?: string;
+//     message: string;
+// }
 
-const SuccessFrame: React.FC<SuccessFrameProps> = ({ uri, message }) => {
+const SuccessPage = ({ navigation }) => {
+    useEffect(() => {
+        const timer = setTimeout(() => {
+            navigation.navigate("HomeScreen");
+        }, 3000);
+
+        return () => clearTimeout(timer);
+
+    }, [])
+
     return (
       <View style={styles.container}>
-          <Text style={styles.text}>{message}</Text>
+          <Text style={styles.text}>Matched!</Text>
           <Image source={require('@/assets/images/excited-people.png')} style={styles.image}/>
-          <View style={styles.loadingContainer}>
-              <ActivityIndicator size="small" color="#FFFFFF" />
-          </View>
       </View>
     );
 }
@@ -45,4 +52,4 @@ const styles = StyleSheet.create({
     }
 });
 
-export default SuccessFrame;
+export default SuccessPage;
